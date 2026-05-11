@@ -19,7 +19,7 @@ public Appointment(int patientId, int examId, boolean fastResults, String examDa
 public int getAppointmentId(){
     return appointmentId;
 }
-
+//γεια
 public int getPatientId(){
     return patientId;
 }
