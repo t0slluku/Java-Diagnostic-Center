@@ -36,7 +36,7 @@ public class DiagnosticCenter {
             specializedExam s1 = new specializedExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
             exams.put(s1.getCode(), s1);
         }else{
-            System.out.println("This exam category doesn't exists or cant be identified.Please try again!");
+            System.out.println("This exam category doesn't exist or can't be identified. Please try again!");
             //πρεπει να βαλουμε κατι ωστε να τερματιζει η διαδικασια και να τον ξαναπηγαινει ωστε να κλεισει απτην αρχη νεο ραντεβου απτο σταδιο τησ ευρεσησ κατηγοριασ 
         }
     }
