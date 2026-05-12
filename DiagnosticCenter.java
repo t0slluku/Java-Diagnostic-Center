@@ -62,7 +62,7 @@ public class DiagnosticCenter {
         if (patients.isEmpty()){
             System.out.println("List is empty.");
         } else {
-            for (Patient p : doctors.values()){
+            for (Patient p : patients.values()){
                 System.out.println(p); 
             }
         }
