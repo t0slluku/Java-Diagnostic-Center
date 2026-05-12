@@ -7,6 +7,7 @@ private int patientId;
 private int examId;
 private boolean fastResults;
 private String examDate;
+private boolean cancelled;
 
 public Appointment(int patientId, int examId, boolean fastResults, String examDate){
     this.appointmentId=idCounter++;
@@ -14,12 +15,13 @@ public Appointment(int patientId, int examId, boolean fastResults, String examDa
     this.examId=examId;
     this.fastResults=fastResults;
     this.examDate=examDate;
+    this.cancelled = false;
 }
 
 public int getAppointmentId(){
     return appointmentId;
 }
-//γεια
+
 public int getPatientId(){
     return patientId;
 }
@@ -30,6 +32,14 @@ public int getExamId(){
 
 public boolean getFastResults(){
     return fastResults;
+}
+
+public boolean getCancelled(){
+    return cancelled;
+}
+
+void setCancelled(boolean cancelled){
+    this.cancelled=cancelled;
 }
 
 public String getExamDate(){
