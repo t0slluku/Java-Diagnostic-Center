@@ -3,70 +3,111 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int answer1;
-        int answer2;
+        String answer1;
+        String answer2;
         boolean done = false;
         boolean done2 = false;
         while (!done) {
             done2 = false;
+            System.out.println("-----MENU-----");
             System.out.println("1. Doctors\n2. Patients\n3. Exams\n4. Appointments\n5. Statistics\n0. Exit");
-            answer1 = Integer.parseInt(in.nextLine());
+            answer1 = in.nextLine();
             switch (answer1) {
-                case 0 : 
+                case "0" : 
                     done = true;
                     break;
-                case 1 :
+                case "1" :
                     while (!done2) {
+                        System.out.println("-----DOCTOR MENU-----");
                         System.out.println("1. Insert doctor\n2. Show all doctors\n3. Show a specific doctor\n4. Appointments for a doctor\n0. Return");
-                        answer2 = Integer.parseInt(in.nextLine());
+                        answer2 = in.nextLine();
                         switch (answer2) {
-                            case 0 :
+                            case "0" :
                                 done2 = true;
+                                break;
+                            case "1":
+                                System.out.println("Dr Emiliano Tossluku");
+                                break;
+                            case "2":
+                                System.out.println("Dr Emiliano Tossluku");
+                                break;
+                            case "3":
+                                System.out.println("Dr Emiliano Tossluku");
+                                break;
+                            case "4":
+                                System.out.println("Dr Emiliano Tossluku");
+                                break;
+                            default:
+                                System.out.println("Wrong input, Try again");
                                 break;
 
                         }
                     }
-                case 2 : 
+                    break;
+                case "2" : 
                     while (!done2) {
+                        System.out.println("-----PATIENT MENU-----");
                         System.out.println("1. Insert patient\n2. Show all patients\n3. Show a specific patient\n0. Return");
-                        answer2 = Integer.parseInt(in.nextLine());
+                        answer2 = in.nextLine();
                         switch (answer2) {
-                            case 0 :
+                            case "0" :
                                 done2 = true;
+                                break;
+                            default:
+                                System.out.println("Wrong input, Try again");
                                 break;
                         }
                     }
-                case 3 : 
+                    break;
+                case "3" : 
                     while (!done2) {
-                            System.out.println("1. Insert exam\n2. Show all exams\n3. Show a specific exam\n0. Return");
-                            answer2 = Integer.parseInt(in.nextLine());
-                            switch (answer2) {
-                                case 0 :
-                                    done2 = true;
-                                    break;
-                            }
+                        System.out.println("-----EXAM MENU-----");
+                        System.out.println("1. Insert exam\n2. Show all exams\n3. Show a specific exam\n0. Return");
+                        answer2 = in.nextLine();
+                        switch (answer2) {
+                            case "0" :
+                                done2 = true;
+                                break;
+                            default:
+                                System.out.println("Wrong input, Try again");
+                                break;
                         }
-                case 4 :
+                    }
+                    break;
+                case "4" :
                     while (!done2) {
-                            System.out.println("1. Insert appointment\n2. Show all appointments\n3. Show appointments of a specific patient\n4. Remove appointment\n5. Show all appointments for a specific day\n0. Return");
-                            answer2 = Integer.parseInt(in.nextLine());
-                            switch (answer2) {
-                                case 0 :
-                                    done2 = true;
-                                    break;
+                        System.out.println("-----APPOINTMENT MENU-----");
+                        System.out.println("1. Insert appointment\n2. Show all appointments\n3. Show appointments of a specific patient\n4. Remove appointment\n5. Show all appointments for a specific day\n0. Return");
+                        answer2 = in.nextLine();
+                        switch (answer2) {
+                            case "0" :
+                                done2 = true;
+                                break;
+                            default:
+                                System.out.println("Wrong input, Try again");
+                                break;
                             }
-                        }
-                case 5 : 
+                    }
+                    break;
+                case "5" : 
                     while (!done2) {
-                            System.out.println("1. Total income from each patient\n2. Total income from each exam\n3. Total income from each exam category\n0. Return");
-                            answer2 = Integer.parseInt(in.nextLine());
-                            switch (answer2) {
-                                case 0 :
-                                    done2 = true;
-                                    break;
-                            }
+                        System.out.println("-----STAT MENU-----");
+                        System.out.println("1. Total income from each patient\n2. Total income from each exam\n3. Total income from each exam category\n0. Return");
+                        answer2 = in.nextLine();
+                        switch (answer2) {
+                            case "0":
+                                done2 = true;
+                                break;
+                            default:
+                                System.out.println("Wrong input, Try again");
+                                break;
                         }
-            } 
+                    }
+                    break;
+                default:
+                    System.out.println("Wrong input, Try again");
+                    break;
+            }   
         }
     }
 }
