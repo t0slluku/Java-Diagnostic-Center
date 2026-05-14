@@ -1,7 +1,7 @@
 
 public class Appointment {
 
-private static int idCounter=0;
+private static int nextId = 0;
 private int appointmentId;
 private int patientId;
 private int examId;
@@ -10,13 +10,24 @@ private String examDate;
 private boolean cancelled;
 
 public Appointment(int patientId, int examId, boolean fastResults, String examDate){
-    this.appointmentId=idCounter++;
+    this.appointmentId=++nextId;
     this.patientId=patientId;
     this.examId=examId;
     this.fastResults=fastResults;
     this.examDate=examDate;
     this.cancelled = false;
 }
+
+public Appointment(int appointmentId, int patientId, int examId, boolean fastResults, String examDate){
+    this.appointmentId=appointmentId;
+    this.patientId=patientId;
+    this.examId=examId;
+    this.fastResults=fastResults;
+    this.examDate=examDate;
+    this.cancelled = false;
+	if (appointmentId > nextId) nextId = appointmentId;
+}
+
 
 public int getAppointmentId(){
     return appointmentId;

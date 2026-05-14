@@ -1,7 +1,7 @@
 
 abstract class Exam {
 
-private static int idCounter=1;
+private static int nextcode = 0;
 private int code;
 private String examCategory;
 private String examName;
@@ -10,12 +10,22 @@ private int cost;
 private int idDoctor;
 
 public Exam(String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor){
-    this.code=idCounter++;
+    this.code=++nextcode;
     this.examCategory=examCategory;
     this.examName=examName;
     this.maxSlotsperDay=maxSlotsperDay;
     this.cost=cost;
     this.idDoctor=idDoctor;
+}
+	
+public Exam(int code,String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor){
+    this.code=code;
+    this.examCategory=examCategory;
+    this.examName=examName;
+    this.maxSlotsperDay=maxSlotsperDay;
+    this.cost=cost;
+    this.idDoctor=idDoctor;
+	if (code > nextcode) nextcode = code;
 
 }
 
