@@ -1,5 +1,8 @@
 
 import java.util.HashMap;
+
+import com.apple.eio.FileManager;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -145,9 +148,9 @@ public class DiagnosticCenter {
 
     public boolean isFullyBooked(int examId, String date){
         int count = 0;
-        Exam e = fm.getexams().get(examId);
+        Exam e = exams.get(examId);
     
-        for (Appointment a : fm.getappointments().values()){
+        for (Appointment a : appointments.values()){
             if (a.getExamId() == examId && a.getExamDate().equals(date)){
                 count++;
             }
@@ -185,22 +188,25 @@ public class DiagnosticCenter {
 
     public void showDayAppointments(String date){
 
-        for (Appointment a: fm.getappointments().values()){
-            if (a.getExamDate()==date){
-                for (Patient p:fm.getpatients().values()){
-                    if (a.getPatientId()==p.getID())
-                        System.out.println("Patient's name: " + p.getName());
-                }
-                for (Exam e:fm.getexams().values()){
-                    if (e.getCode()==a.getExamId()){
-                        System.out.println("Name of the examination: " + e.getExamName());
+        if (date.matches("\\d{2}:\\d{2}:\\d{4}")){
+            for (Appointment a: fm.getappointments().values()){
+                if (a.getExamDate()==date){
+                    for (Patient p:fm.getpatients().values()){
+                        if (a.getPatientId()==p.getID())
+                            System.out.println("Patient's name: " + p.getName());
                     }
-                }
-                System.out.println(a);
+                    for (Exam e:fm.getexams().values()){
+                        if (e.getCode()==a.getExamId()){
+                            System.out.println("Name of the examination: " + e.getExamName());
+                        }
+                    }
+                    System.out.println(a);
                 
+                }
             }
+        }else{
+            System.out.println("Wrong date type input,try again: ");
         }
-
     }
 //5.1
 
@@ -257,8 +263,8 @@ public class DiagnosticCenter {
     //5.3
 
     public void revenuePerCategory(){
-    String[] categories = {"Imaging", "Microbiological", "Specialized"};
-    double totalProfit = 0;
+        String[] categories = {"Imaging", "Microbiological", "Specialized"};
+        double totalProfit = 0;
     
         for (String category : categories){
             System.out.println("Category: " + category);
