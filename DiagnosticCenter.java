@@ -1,8 +1,6 @@
 
 import java.util.HashMap;
-
-import com.apple.eio.FileManager;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -12,6 +10,7 @@ import java.util.Comparator;
 public class DiagnosticCenter {
 
     FileManager fm = new FileManager();
+	
 
     // adders
     public void addDoctor(String name, String phone, String specialty, int yearsofExp){
@@ -148,9 +147,9 @@ public class DiagnosticCenter {
 
     public boolean isFullyBooked(int examId, String date){
         int count = 0;
-        Exam e = exams.get(examId);
+        Exam e = fm.getexams().get(examId);
     
-        for (Appointment a : appointments.values()){
+        for (Appointment a : fm.getappointments().values()){
             if (a.getExamId() == examId && a.getExamDate().equals(date)){
                 count++;
             }
@@ -287,11 +286,43 @@ public class DiagnosticCenter {
     
         System.out.println("Total profit from all categories: " + totalProfit);
     }
-
-
-
+	
+	public void StoreAll(){
+		fm.storeFile("doctors.txt");
+		fm.storeFile("patients.txt");
+		fm.storeFile("exams.txt");
+		fm.storeFile("appointments.txt");
+	}
+	
+	public void NoDoctors(){
+		Doctor d1 = new Doctor("d1", "111", "Cardiology", 10);
+		Doctor d2 = new Doctor("d2", "222", "Radiology", 5);
+		fm.getdoctors().put(d1.getID(),d1);
+		fm.getdoctors().put(d2.getID(),d2);
+		
 } 
+public void NoPatients(){
+	Patient p1 = new Patient("P1", "6901", "a@a.com");
+	Patient p2 = new Patient("P2", "6902", "b@b.com");	
+	fm.getpatients().put(p1.getID(),p1);
+	fm.getpatients().put(p2.getID(),p2);
+}
 
+public void NoExams(){
+	imagingExam e1 = new imagingExam("Imaging", "XRAY", 10,30,2,"X-Ray"); 
+	microbiologicalExam e2 = new microbiologicalExam("Microbiological","PCR",20,20,3,"Blood");
+	fm.getexams().put(e1.getCode(),e1);
+	fm.getexams().put(e1.getCode(),e1);
+}
+
+public void NoAppointments(){
+	Appointment a1 = new Appointment(1,1,true,"10:05:2026");
+	Appointment a2 = new Appointment(2,2,false,"16:05:2026");
+	fm.getappointments().put(a1.getAppointmentId(),a1);
+	fm.getappointments().put(a2.getAppointmentId(),a2);
+}
+
+}
 
 
 

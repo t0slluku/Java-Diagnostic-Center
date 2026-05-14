@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +11,27 @@ public class Main {
         String answer2;
         boolean done = false;
         boolean done2 = true;
+		File file1 = new File("doctors.txt");
+		File file2 = new File("exams.txt");
+		File file3 = new File("appointments.txt");
+		File file4 = new File("patients.txt");
+	
+		if (!file1.exists()) {
+			System.out.println("\nFile does not exist. Creating data ...");
+			dc.NoDoctors();
+		}
+		if (!file2.exists()) {
+			System.out.println("\nFile does not exist. Creating data ...");
+			dc.NoExams();
+		}
+		if (!file3.exists()) {
+			System.out.println("\nFile does not exist. Creating data ...");
+			dc.NoAppointments();
+		}
+		if (!file4.exists()) {
+			System.out.println("\nFile does not exist. Creating data ...");
+			dc.NoPatients();
+		}
 
         while (!done) {
             done2 = false;
@@ -19,6 +41,7 @@ public class Main {
             switch (answer1) {
                 case "0" : 
                     done = true;
+					dc.StoreAll();
                     break;
                 case "1" :
                     while (!done2) {
@@ -212,15 +235,15 @@ public class Main {
                                 if (!date.matches("\\d{2}:\\d{2}:\\d{4}")){
                                     System.out.println("Wrong date format. Try again.");
                                     continue;
-
-                                if (center.isFullyBooked(examId, date)){
+								}
+                                if (dc.isFullyBooked(examId, date)){
                                     System.out.println("No available slots for this date. Try another date.");
                                     continue;
                                 }
                                 break;
 
                             }
-                            }
+                            
                             boolean fastResults;
                             System.out.println("Fast results? (1=Yes, 0=No): ");
                             String answer3= in.nextLine();
@@ -231,7 +254,7 @@ public class Main {
                             }
 
                             dc.addAppointment(patientId,examId,fastResults,date);
-
+					
                             case "2" :
                                 dc.listAllAppointments();
 
