@@ -10,6 +10,12 @@ public microbiologicalExam(String examCategory, String examName, int maxSlotsper
     this.sampleType=sampleType;
 }
 
+public microbiologicalExam(int code, String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor, String sampleType){
+    super(code, examCategory,examName, maxSlotsperDay, cost, idDoctor);
+    this.sampleType=sampleType;
+}
+
+
 public double getCost(boolean fastResults){
     if (fastResults){
         examCost= cost() + cost()*costIncreaseRate;

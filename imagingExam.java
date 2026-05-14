@@ -10,6 +10,11 @@ public imagingExam(String examCategory, String examName, int maxSlotsperDay, int
     this.machineType=machineType;
 }
 
+public imagingExam(int code, String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor, String machineType){
+    super(code, examCategory, examName, maxSlotsperDay, cost, idDoctor);
+    this.machineType=machineType;
+}
+
 public double getCost(boolean fastResults){
     if (fastResults){
         examCost= cost() + cost()*costIncreaseRate;

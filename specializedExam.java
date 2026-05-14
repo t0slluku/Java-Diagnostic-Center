@@ -10,6 +10,11 @@ public specializedExam(String examCategory, String examName, int maxSlotsperDay,
     this.specialty=specialty;
 }
 
+public specializedExam(int code, String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor, String specialty){
+    super(code, examCategory, examName, maxSlotsperDay, cost, idDoctor);
+    this.specialty=specialty;
+}
+
 public double getCost(boolean fastResults){
     if (fastResults){
         examCost= cost() + cost()*costIncreaseRate;
