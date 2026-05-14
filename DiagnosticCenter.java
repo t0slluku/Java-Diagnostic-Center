@@ -8,10 +8,11 @@ import java.util.Comparator;
 
 public class DiagnosticCenter {
 
-    private HashMap<Integer,Doctor> doctors = new HashMap<>();
-    private HashMap<Integer,Patient> patients = new HashMap<>();
-    private HashMap<Integer,Appointment> appointments= new HashMap<>();
-    private HashMap<Integer,Exam> exams= new HashMap<>();
+    FileManager fm = new FileManager;
+    private HashMap<Integer,Doctor> doctors = fm.getdoctors();
+    private HashMap<Integer,Patient> patients = fm.getpatients();
+    private HashMap<Integer,Appointment> appointments= fm.getappointments();
+    private HashMap<Integer,Exam> exams= fm.getexams();
 
     // adders
     public void addDoctor(String name, String phone, String specialty, int yearsofExp){
