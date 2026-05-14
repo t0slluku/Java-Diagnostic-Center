@@ -52,7 +52,7 @@ class FileManager {
 
 
 
-public getdoctors(HashMap<Integer,Doctor> doctors){
+public HashMap<Integer,Doctor> getdoctors(HashMap<Integer,Doctor> doctors){
     return doctors;
 }
 
