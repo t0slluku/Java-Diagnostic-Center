@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        
         DiagnosticCenter dc = new DiagnosticCenter();
         Scanner in = new Scanner(System.in);
         String answer1;
         String answer2;
         boolean done = false;
-        boolean done2 = false;
+        boolean done2 = true;
+
         while (!done) {
             done2 = false;
             System.out.println("-----MENU-----");
@@ -105,16 +107,17 @@ public class Main {
                             case "1" :
 
                                 System.out.println("Available exam categories:\nChoose the category");
-                                System.out.println("1. Imagining\n2. Microbiological\n3. Specialized");//lista onomatwn me tis yparxon kathgories//na mhn periorizomai se dikes m kathgories
+                                System.out.println("1. Imaging\n2. Microbiological\n3. Specialized");
                                 String answer = in.nextLine();
                                 String details;
                                 String examCategory;
+                                String answer3;
 
                                 if (answer=="1"){
-                                    examCategory ="Imagining";
+                                    examCategory ="Imaging";
                                     System.out.println("Choose the machine type for your exam: ");
                                     System.out.println("1. MRI\n2. CT\n3. X-RAY");
-                                    String answer3 = in.nextLine();
+                                    answer3 = in.nextLine();
                                    
                                     if (answer3=="1"){
                                         details="MRI";
@@ -127,7 +130,7 @@ public class Main {
                                     examCategory="Microbiological";
                                     System.out.println("Choose the type of sample needed: ");
                                     System.out.println("1. Blood\n2. Urine\n3. Swab");
-                                    String answer3 = in.nextLine();
+                                    answer3 = in.nextLine();
                                     
                                     if (answer3=="1"){
                                         details="Blood";
@@ -140,7 +143,7 @@ public class Main {
                                     examCategory="Specialized";
                                     System.out.println("Choose the specialty neede for this exam: ");
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
-                                    String answer3 = in.nextLine();
+                                    answer3 = in.nextLine();
                                     
                                     if (answer3=="1"){
                                         details="Cardiology";
@@ -183,6 +186,7 @@ public class Main {
                     }
                     break;
                 case "4" :
+
                     while (!done2) {
                         System.out.println("-----APPOINTMENT MENU-----");
                         System.out.println("1. Insert appointment\n2. Show all appointments\n3. Show appointments of a specific patient\n4. Remove appointment\n5. Show all appointments for a specific day\n0. Return");
@@ -191,6 +195,67 @@ public class Main {
                             case "0" :
                                 done2 = true;
                                 break;
+                            case "1" : 
+
+                            System.out.println("Choose the patient based on his/her id: ");
+                            dc.listAllPatients();
+                            int patientId = Integer.parseInt(in.nextLine());
+
+                            System.out.println("Choose the exam based on its id: ");
+                            dc.listAllExams();
+                            int examId = Integer.parseInt(in.nextLine());
+
+                            String date;
+                            while(true){
+                                System.out.println("Give date as the example:\nDD:MM:EEEE");
+                                date = in.nextLine();
+                                if (!date.matches("\\d{2}:\\d{2}:\\d{4}")){
+                                    System.out.println("Wrong date format. Try again.");
+                                    continue;
+
+                                if (center.isFullyBooked(examId, date)){
+                                    System.out.println("No available slots for this date. Try another date.");
+                                    continue;
+                                }
+                                break;
+
+                            }
+                            }
+                            boolean fastResults;
+                            System.out.println("Fast results? (1=Yes, 0=No): ");
+                            String answer3= in.nextLine();
+                            if (answer3=="1"){
+                                fastResults=true;
+                            }else{
+                                fastResults=false;
+                            }
+
+                            dc.addAppointment(patientId,examId,fastResults,date);
+
+                            case "2" :
+                                dc.listAllAppointments();
+
+                            case "3" :
+
+                                System.out.println("Choose the patient based on his/her id: ");
+                                dc.listAllPatients();
+                                int id =Integer.parseInt(in.nextLine());
+                                dc.FindAppointmentDateByPatientID(id);
+
+                            case "4":
+
+                                System.out.println("Choose the exam you want to delete by choosing its id: ");
+                                dc.listAllExams();
+                                int id1 = Integer.parseInt(in.nextLine());
+                                dc.removeAppointment(id1);
+
+                            case "5" :
+
+                                System.out.println("Give a date (HH:MM:EEEE) to see its appointments: ");
+                                String date1 = in.nextLine();
+                                dc.showDayAppointments(date1);
+
+                                
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
@@ -206,6 +271,16 @@ public class Main {
                             case "0":
                                 done2 = true;
                                 break;
+
+                            case "1" :
+                                dc.showTotalProfitsPerPatient();
+
+                            case "2" :
+                                dc.showTotalProfitsperExam();
+
+                            case "3" :
+                                dc.revenuePerCategory();
+
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
