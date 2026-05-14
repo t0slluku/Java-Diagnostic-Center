@@ -25,6 +25,10 @@ public double getCost(boolean fastResults){
 
 }
 
+public String getSpecialty(){
+	return specialty;
+}
+
 
 public String toString(){
     return super.toString() + ", Specialty: " + specialty;

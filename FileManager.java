@@ -105,8 +105,8 @@ class FileManager {
 
             if (filePath.equals("doctors.txt")) {
                 for (Doctor doctor : doctors.values()) {
-                    writer.write("Doctor,"
-                            + doctor.getID() + ","
+                    writer.write(
+                            doctor.getID() + ","
                             + doctor.getName() + ","
                             + doctor.getPhone() + ","
                             + doctor.getSpecialty() + ","
@@ -115,8 +115,8 @@ class FileManager {
                 }
             } else if (filePath.equals("patients.txt")) {
                 for (Patient patient : patients.values()) {
-                    writer.write("Patient,"
-                            + patient.getID() + ","
+                    writer.write(
+                            patient.getID() + ","
                             + patient.getName() + ","
                             + patient.getPhone() + ","
                             + patient.getEmail());
@@ -125,18 +125,46 @@ class FileManager {
             } else if (filePath.equals("exams.txt")) {
                 for (Exam exam : exams.values()) {
                     String examType = exam.getExamCategory();
-                    writer.write(examType + ","
-                            + exam.getCode() + ","
-                            + exam.getExamName() + ","
+					if (examType=="Imaging"){
+                    writer.write(
+                             exam.getCode() + ","
+							 + exam.getExamName() + ","
+							 +exam.getExamCategory()+","
+                            +((imagingExam)exam).getMachineType()+","
                             + exam.getMaxSlotsperDay() + ","
-                            + exam.getIdDoctor() + ","
-                            + exam.cost()); // initial akeraio kostos, den exei perasthei to fastResults
+							+ exam.cost() + ","
+                            + exam.getIdDoctor());
                     writer.newLine();
+					}
+					
+					if (examType=="Microbiological"){
+					writer.write(
+                             exam.getCode() + ","
+							 + exam.getExamName() + ","
+							 +exam.getExamCategory()+","
+                            +((microbiologicalExam)exam).getSampleType()+","
+                            + exam.getMaxSlotsperDay() + ","
+							+ exam.cost() + ","
+                            + exam.getIdDoctor());
+                    writer.newLine();
+					}
+					
+					if (examType=="Specialized"){
+					  writer.write(
+                             exam.getCode() + ","
+							 + exam.getExamName() + ","
+							 +exam.getExamCategory()+","
+                            +((specializedExam)exam).getSpecialty()+","
+                            + exam.getMaxSlotsperDay() + ","
+							+ exam.cost() + ","
+                            + exam.getIdDoctor());
+                    writer.newLine();
+					}
                 }
             } else if (filePath.equals("appointments.txt")) {
                 for (Appointment appointment : appointments.values()) {
-                    writer.write("Appointment,"
-                            + appointment.getAppointmentId() + ","
+                    writer.write(
+                            appointment.getAppointmentId() + ","
                             + appointment.getPatientId() + ","
                             + appointment.getExamId() + ","
                             + appointment.getFastResults() + ","

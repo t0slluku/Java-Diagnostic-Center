@@ -25,6 +25,10 @@ public double getCost(boolean fastResults){
 
 }
 
+public String getMachineType(){
+	return machineType;
+}
+
 
 public String toString(){
     return super.toString() + ", MachineType: " + machineType;

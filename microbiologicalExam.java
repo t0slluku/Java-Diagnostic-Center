@@ -26,6 +26,10 @@ public double getCost(boolean fastResults){
 
 }
 
+public String getSampleType(){
+	return sampleType;
+}
+
 
 public String toString(){
     return super.toString() + ", SampleType: " + sampleType;

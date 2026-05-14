@@ -18,20 +18,40 @@ public class Main {
 	
 		if (!file1.exists()) {
 			System.out.println("\nFile does not exist. Creating data ...");
-			dc.NoDoctors();
+			Doctor d1 = new Doctor("d1", "111", "Cardiology", 10);
+			Doctor d2 = new Doctor("d2", "222", "Radiology", 5);
+			dc.fm.getdoctors().put(d1.getID(),d1);
+			dc.fm.getdoctors().put(d2.getID(),d2);
 		}
+		else dc.fm.loadFile("doctors.txt");
+		
 		if (!file2.exists()) {
 			System.out.println("\nFile does not exist. Creating data ...");
-			dc.NoExams();
+			imagingExam e1 = new imagingExam("Imaging", "XRAY", 10,30,2,"X-Ray"); 
+			microbiologicalExam e2 = new microbiologicalExam("Microbiological","PCR",20,20,3,"Blood");
+			dc.fm.getexams().put(e1.getCode(),e1);
+			dc.fm.getexams().put(e1.getCode(),e1);
 		}
+		else dc.fm.loadFile("exams.txt");
+		
 		if (!file3.exists()) {
 			System.out.println("\nFile does not exist. Creating data ...");
-			dc.NoAppointments();
+			Appointment a1 = new Appointment(1,1,true,"10:05:2026");
+			Appointment a2 = new Appointment(2,2,false,"16:05:2026");
+			dc.fm.getappointments().put(a1.getAppointmentId(),a1);
+			dc.fm.getappointments().put(a2.getAppointmentId(),a2);
 		}
+		else dc.fm.loadFile("appointments.txt");
+		
 		if (!file4.exists()) {
 			System.out.println("\nFile does not exist. Creating data ...");
-			dc.NoPatients();
+			Patient p1 = new Patient("P1", "6901", "a@a.com");
+			Patient p2 = new Patient("P2", "6902", "b@b.com");	
+			dc.fm.getpatients().put(p1.getID(),p1);
+			dc.fm.getpatients().put(p2.getID(),p2);
 		}
+		else dc.fm.loadFile("patients.txt");
+		
 
         while (!done) {
             done2 = false;
