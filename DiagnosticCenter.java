@@ -171,7 +171,7 @@ public class DiagnosticCenter {
 
     //show appointment's of a specific date 4.5
 
-    public void showDayAppointments(string date){
+    public void showDayAppointments(String date){
 
         for (Appointment a: appointments.values()){
             if (a.getExamDate()==date){
@@ -238,7 +238,7 @@ public class DiagnosticCenter {
             System.out.println("-------------------------");
 
         }
-        System.out.println("Total profit from all exams: " + totalProfitFromAllPatients);
+        System.out.println("Total profit from all exams: " + totalProfitFromAllExams);
 
     }
 
@@ -256,7 +256,7 @@ public class DiagnosticCenter {
                 Exam e = exams.get(a.getExamId());
             
                 if (e.getExamCategory().equals(category)){
-                    System.out.println(a); // εκτυπωνει τα χαρακτηριστικα του ραντεβου
+                    System.out.println(a); 
                     double cost = e.getCost(a.getFastResults());
                     categoryProfit = categoryProfit + cost;
                 }

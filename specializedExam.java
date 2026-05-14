@@ -22,7 +22,7 @@ public double getCost(boolean fastResults){
 
 
 public String toString(){
-    return super.toString() + ", Specialty: " + examSpecialty;
+    return super.toString() + ", Specialty: " + specialty;
 }
 
 

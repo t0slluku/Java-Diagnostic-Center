@@ -41,6 +41,7 @@ public int getIdDoctor(){
 
 abstract double getCost(boolean fastResults);
 
+
 public int cost(){
     return cost;
 }

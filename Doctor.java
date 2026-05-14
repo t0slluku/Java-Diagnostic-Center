@@ -39,9 +39,9 @@ public int getYearsofExp(){
 
 
 public String toString(){
-    return "ID: " + doctorID + 
+    return "ID: " + doctorId + 
            ", Name: " + name + 
-           ", Phone: " + phonehone + 
+           ", Phone: " + phone + 
            ", Specialty: " + specialty + 
            ", Years of experience: " + yearsofExp;
 }
