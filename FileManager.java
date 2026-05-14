@@ -56,15 +56,15 @@ public HashMap<Integer,Doctor> getdoctors(HashMap<Integer,Doctor> doctors){
     return doctors;
 }
 
-public getexams(HashMap<Integer,Exam> exams){
+public HashMap<Integer,Exam> getexams(HashMap<Integer,Exam> exams){
     return exams;
 }
 
-public getappointments(HashMap<Integer,Appointment> appointments){
+public HashMap<Integer,Appointment> getappointments(HashMap<Integer,Appointment> appointments){
     return appointments;
 }
 
-public getpatients(HashMap<Integer,Patient> patients){
+public HashMap<Integer,Patient> getpatients(HashMap<Integer,Patient> patients){
     return patients;
 }
-
+}
