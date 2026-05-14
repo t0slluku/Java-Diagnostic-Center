@@ -1,5 +1,8 @@
 
 import java.util.HashMap;
+
+import com.apple.eio.FileManager;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -141,6 +144,19 @@ public class DiagnosticCenter {
             }
         }
 
+    }
+
+    public boolean isFullyBooked(int examId, String date){
+        int count = 0;
+        Exam e = exams.get(examId);
+    
+        for (Appointment a : appointments.values()){
+            if (a.getExamId() == examId && a.getExamDate().equals(date)){
+                count++;
+            }
+        }
+    
+        return count >= e.getMaxSlotsperDay();
     }
 
     //show the dates of a patient's appointment 4.3
