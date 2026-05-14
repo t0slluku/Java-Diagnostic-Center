@@ -40,7 +40,50 @@ class FileManager {
 
                     patients.put(patient.getID(), patient);
                 } else if (filePath.equals("exams.txt")) {
-                    // Διαχείριση αρχείου εξετάσεων
+                    String examType = tokens[1];
+                    switch (examType) {
+                        case "Imaging":
+                            imagingExam imagingExam = new imagingExam(
+                                    tokens[1],
+                                    tokens[2],
+                                    Integer.parseInt(tokens[3]),
+                                    Integer.parseInt(tokens[4]),
+                                    Integer.parseInt(tokens[5]),
+                                    tokens[6]
+                            );
+                            exams.put(imagingExam.getCode(), imagingExam);
+                            break;
+                        case "Microbiological":
+                            microbiologicalExam microbiologicalExam = new microbiologicalExam(
+                                    tokens[1],
+                                    tokens[2],
+                                    Integer.parseInt(tokens[3]),
+                                    Integer.parseInt(tokens[4]),
+                                    Integer.parseInt(tokens[5]),
+                                    tokens[6]
+                            );
+                            exams.put(microbiologicalExam.getCode(), microbiologicalExam);
+                            break;
+                        case "Specialized" : 
+                            specializedExam specializedExam = new specializedExam(
+                                    tokens[1],
+                                    tokens[2],
+                                    Integer.parseInt(tokens[3]),
+                                    Integer.parseInt(tokens[4]),
+                                    Integer.parseInt(tokens[5]),
+                                    tokens[6]
+                            );
+                            exams.put(specializedExam.getCode(), specializedExam);
+                            break;
+                    }
+                } else if (filePath.equals("appointments.txt")) {
+                    Appointment appointment = new Appointment(
+                            Integer.parseInt(tokens[1]),
+                            Integer.parseInt(tokens[2]),
+                            Boolean.parseBoolean(tokens[3]),
+                            tokens[4]
+                    );
+                    appointments.put(appointment.getAppointmentId(), appointment);
                 }
             }
 			reader.close(); // κλείσιμο αρχείου
