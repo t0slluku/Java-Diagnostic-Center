@@ -83,7 +83,7 @@ public class Main {
                             case "3" :
                                 dc.listAllPatients();
                                 System.out.println("Choose the patient based on his/her id: ");
-                                int id = Integer.parseInt(id);
+                                int id = Integer.parseInt(in.nextLine());
                                 dc.FindAppointmentByPatientID(id);
                             default:
                                 System.out.println("Wrong input, Try again");
@@ -105,11 +105,13 @@ public class Main {
                             case "1" :
 
                                 System.out.println("Available exam categories:\nChoose the category");
-                                System.out.println("1. Imagining\n2. Microbiological\n3. Specialized");
+                                System.out.println("1. Imagining\n2. Microbiological\n3. Specialized");//lista onomatwn me tis yparxon kathgories//na mhn periorizomai se dikes m kathgories
                                 String answer = in.nextLine();
                                 String details;
+                                String examCategory;
+
                                 if (answer=="1"){
-                                    String examCategory ="Imagining";
+                                    examCategory ="Imagining";
                                     System.out.println("Choose the machine type for your exam: ");
                                     System.out.println("1. MRI\n2. CT\n3. X-RAY");
                                     String answer3 = in.nextLine();
@@ -121,8 +123,8 @@ public class Main {
                                     }else{
                                         details="X-RAY";
                                     }
-                                }else if (answe=="2"){
-                                    String examCategory="Microbiological";
+                                }else if (answer1=="2"){
+                                    examCategory="Microbiological";
                                     System.out.println("Choose the type of sample needed: ");
                                     System.out.println("1. Blood\n2. Urine\n3. Swab");
                                     String answer3 = in.nextLine();
@@ -135,7 +137,7 @@ public class Main {
                                         details="Swab";
                                     }
                                 }else{
-                                    String examCategory="Specialized";
+                                    examCategory="Specialized";
                                     System.out.println("Choose the specialty neede for this exam: ");
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
                                     String answer3 = in.nextLine();
