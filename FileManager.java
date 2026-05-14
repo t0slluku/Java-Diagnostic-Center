@@ -2,9 +2,12 @@ import java.io.*;
 import java.util.*;
 
 class FileManager {
-    HashMap<Integer, Doctor> doctors = new HashMap<>();
-    HashMap<Integer, Patient> patients = new HashMap<>();
-
+	
+    private HashMap<Integer,Doctor> doctors = new HashMap<>();
+    private HashMap<Integer,Patient> patients = new HashMap<>();
+    private HashMap<Integer,Appointment> appointments= new HashMap<>();
+    private HashMap<Integer,Exam> exams= new HashMap<>();
+	
     void loadFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
