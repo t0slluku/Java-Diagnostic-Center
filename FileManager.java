@@ -99,6 +99,57 @@ class FileManager {
         }
     }
 
+	    void storeFile(String filePath) {
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+
+            if (filePath.equals("doctors.txt")) {
+                for (Doctor doctor : doctors.values()) {
+                    writer.write("Doctor,"
+                            + doctor.getID() + ","
+                            + doctor.getName() + ","
+                            + doctor.getPhone() + ","
+                            + doctor.getSpecialty() + ","
+                            + doctor.getYearsofExp());
+                    writer.newLine();     
+                }
+            } else if (filePath.equals("patients.txt")) {
+                for (Patient patient : patients.values()) {
+                    writer.write("Patient,"
+                            + patient.getID() + ","
+                            + patient.getName() + ","
+                            + patient.getPhone() + ","
+                            + patient.getEmail());
+                    writer.newLine();     
+                }
+            } else if (filePath.equals("exams.txt")) {
+                for (Exam exam : exams.values()) {
+                    String examType = exam.getExamCategory();
+                    writer.write(examType + ","
+                            + exam.getCode() + ","
+                            + exam.getExamName() + ","
+                            + exam.getMaxSlotsperDay() + ","
+                            + exam.getIdDoctor() + ","
+                            + exam.cost()); // initial akeraio kostos, den exei perasthei to fastResults
+                    writer.newLine();
+                }
+            } else if (filePath.equals("appointments.txt")) {
+                for (Appointment appointment : appointments.values()) {
+                    writer.write("Appointment,"
+                            + appointment.getAppointmentId() + ","
+                            + appointment.getPatientId() + ","
+                            + appointment.getExamId() + ","
+                            + appointment.getFastResults() + ","
+                            + appointment.getExamDate());
+                    writer.newLine();
+                }
+            }
+			writer.close(); // κλείσιμο αρχείου
+
+        } catch (IOException e) {
+            System.err.println("Error writing file: " + e.getMessage());
+        }
+    } //storeFile
 
 
 public HashMap<Integer,Doctor> getdoctors(){
