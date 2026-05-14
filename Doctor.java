@@ -1,7 +1,7 @@
 
 public class Doctor {
 
-private static int idCounter=1;
+private static int nextId = 0;
 private int doctorId;
 private String name;
 private String phone;
@@ -9,11 +9,20 @@ private String specialty;
 private int yearsofExp;
 
 public Doctor(String name, String phone, String specialty, int yearsofExp){
-    this.doctorId=idCounter++;
+    this.doctorId=++nextId;
     this.name=name;
     this.phone=phone;
     this.specialty=specialty;
     this.yearsofExp=yearsofExp;
+}
+	
+public Doctor(int doctorId, String name, String phone, String specialty, int yearsofExp){
+    this.doctorId=doctorId;
+    this.name=name;
+    this.phone=phone;
+    this.specialty=specialty;
+    this.yearsofExp=yearsofExp;
+	if (doctorId > nextId) nextId = doctorId;
 
 }
 
