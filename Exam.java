@@ -1,7 +1,7 @@
 
 abstract class Exam {
 
-private static int idCounter=0;
+private static int idCounter=1;
 private int code;
 private String examCategory;
 private String examName;
