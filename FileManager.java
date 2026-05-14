@@ -24,6 +24,7 @@ class FileManager {
                 //String type = tokens[0];
                 if (filePath.equals("doctors.txt")) {
                     Doctor doctor = new Doctor(
+							Integer.parseInt(tokens[0])
                             tokens[1],
                             tokens[2],
                             tokens[3],
@@ -33,6 +34,7 @@ class FileManager {
                     doctors.put(doctor.getID(), doctor);
                 } else if (filePath.equals("patients.txt")) {
                     Patient patient = new Patient(
+							Integer.parseInt(tokens[0])
                             tokens[1],
                             tokens[2],
                             tokens[3]
@@ -44,6 +46,7 @@ class FileManager {
                     switch (examType) {
                         case "Imaging":
                             imagingExam imagingExam = new imagingExam(
+									Integer.parseInt(tokens[0])
                                     tokens[1],
                                     tokens[2],
                                     Integer.parseInt(tokens[3]),
@@ -55,6 +58,7 @@ class FileManager {
                             break;
                         case "Microbiological":
                             microbiologicalExam microbiologicalExam = new microbiologicalExam(
+									Integer.parseInt(tokens[0])
                                     tokens[1],
                                     tokens[2],
                                     Integer.parseInt(tokens[3]),
@@ -66,6 +70,7 @@ class FileManager {
                             break;
                         case "Specialized" : 
                             specializedExam specializedExam = new specializedExam(
+									Integer.parseInt(tokens[0])
                                     tokens[1],
                                     tokens[2],
                                     Integer.parseInt(tokens[3]),
@@ -78,6 +83,7 @@ class FileManager {
                     }
                 } else if (filePath.equals("appointments.txt")) {
                     Appointment appointment = new Appointment(
+							Integer.parseInt(tokens[0])
                             Integer.parseInt(tokens[1]),
                             Integer.parseInt(tokens[2]),
                             Boolean.parseBoolean(tokens[3]),
