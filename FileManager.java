@@ -52,19 +52,19 @@ class FileManager {
 
 
 
-public HashMap<Integer,Doctor> getdoctors(HashMap<Integer,Doctor> doctors){
+public HashMap<Integer,Doctor> getdoctors(){
     return doctors;
 }
 
-public HashMap<Integer,Exam> getexams(HashMap<Integer,Exam> exams){
+public HashMap<Integer,Exam> getexams(){
     return exams;
 }
 
-public HashMap<Integer,Appointment> getappointments(HashMap<Integer,Appointment> appointments){
+public HashMap<Integer,Appointment> getappointments(){
     return appointments;
 }
 
-public HashMap<Integer,Patient> getpatients(HashMap<Integer,Patient> patients){
+public HashMap<Integer,Patient> getpatients(){
     return patients;
 }
 }
