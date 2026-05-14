@@ -1,7 +1,7 @@
 
 public class Patient {
 
-private static int idCounter=0;
+private static int idCounter=1;
 private int patientId;
 private String name;
 private String phone;
