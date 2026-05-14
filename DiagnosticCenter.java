@@ -8,34 +8,30 @@ import java.util.Comparator;
 
 public class DiagnosticCenter {
 
-    FileManager fm = new FileManager;
-    private HashMap<Integer,Doctor> doctors = fm.getdoctors();
-    private HashMap<Integer,Patient> patients = fm.getpatients();
-    private HashMap<Integer,Appointment> appointments= fm.getappointments();
-    private HashMap<Integer,Exam> exams= fm.getexams();
+    FileManager fm = new FileManager();
 
     // adders
     public void addDoctor(String name, String phone, String specialty, int yearsofExp){
         Doctor d1 = new Doctor(name, phone, specialty, yearsofExp);
-        doctors.put(d1.getID(),d1);
+        fm.getdoctors().put(d1.getID(),d1);
     }
 
     public void addPatient(String name, String phone, String email){
         Patient p1 = new Patient(name, phone, email);
-        patients.put(p1.getID(), p1);
+        fm.getpatients().put(p1.getID(), p1);
     }
 
     public void addExam(String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor, String details){
         //details=machine type /sample type / specialty
         if (details.toLowerCase().contains("ma")| details=="machine"){
             imagingExam i1= new imagingExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
-            exams.put(i1.getCode(), i1);
+            fm.getexams().put(i1.getCode(), i1);
         }else if (details.toLowerCase().contains("sam")| details=="sample"){
             microbiologicalExam m1 = new microbiologicalExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
-            exams.put(m1.getCode(), m1);
+            fm.getexams().put(m1.getCode(), m1);
         }else if (details.toLowerCase().contains("spe")| details=="specialty"){
             specializedExam s1 = new specializedExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
-            exams.put(s1.getCode(), s1);
+            fm.getexams().put(s1.getCode(), s1);
         }else{
             System.out.println("This exam category doesn't exists or cant be identified.Please try again!"); 
         }
@@ -44,36 +40,36 @@ public class DiagnosticCenter {
 
     public void addAppointment(int patientId, int examId, boolean fastResults, String examDate){
         Appointment a1 = new Appointment(patientId, examId, fastResults, examDate);
-        appointments.put(a1.getAppointmentId(), a1);  
+        fm.getappointments().put(a1.getAppointmentId(), a1);  
     }
 
     // list all //na kanw 1 gia 3
 
     public void listAllDoctors(){
-        if (doctors.isEmpty()){
+        if (fm.getdoctors().isEmpty()){
         System.out.println("List is empty.");
         } else {
-            for (Doctor d : doctors.values()){
+            for (Doctor d : fm.getdoctors().values()){
                 System.out.println(d); 
             }
         }
     }
     
     public void listAllPatients(){
-        if (patients.isEmpty()){
+        if (fm.getpatients().isEmpty()){
             System.out.println("List is empty.");
         } else {
-            for (Patient p : patients.values()){
+            for (Patient p : fm.getpatients().values()){
                 System.out.println(p); 
             }
         }
     }
     
     public void listAllExams(){
-        if (exams.isEmpty()){
+        if (fm.getexams().isEmpty()){
             System.out.println("List is empty.");
         }else{
-            ArrayList<Exam> sortedExams = new ArrayList<>(exams.values());
+            ArrayList<Exam> sortedExams = new ArrayList<>(fm.getexams().values());
             sortedExams.sort(Comparator.comparing(Exam::getExamName));
             for (Exam e : sortedExams){
                 System.out.println(e);
@@ -82,11 +78,13 @@ public class DiagnosticCenter {
     }
 
     public void listAllAppointments(){
-        if (appointments.isEmpty()){
+        if (fm.getappointments().isEmpty()){
             System.out.println("List is empty.");
         }else{
-            for (Appointment a: appointments.values()){
-                System.out.println(a);
+            for (Appointment a: fm.getappointments().values()){
+				if (!a.getCancelled()){
+					System.out.println(a);
+				}
             }
         }
     }
@@ -96,7 +94,7 @@ public class DiagnosticCenter {
 
     public void FindExamByDoctorID(int id){
 
-        for (Exam e: exams.values()){
+        for (Exam e: fm.getexams().values()){
             if (e.getIdDoctor()==id){
                 System.out.println(e);
             }
@@ -107,9 +105,9 @@ public class DiagnosticCenter {
 
     public void FindAppointmentByDoctorID(int id){
 
-        for (Exam e: exams.values()){
+        for (Exam e: fm.getexams().values()){
             if (e.getIdDoctor()==id){
-                for (Appointment a: appointments.values()){
+                for (Appointment a: fm.getappointments().values()){
                     if (e.getCode() == a.getExamId()){
                         System.out.println(a);
                     }
@@ -123,8 +121,8 @@ public class DiagnosticCenter {
 
     public void FindAppointmentByPatientID(int id){
 
-        Patient p = patients.get(id);
-        for (Appointment a: appointments.values()){
+        Patient p = fm.getpatients().get(id);
+        for (Appointment a: fm.getappointments().values()){
             if (a.getPatientId() == p.getID()){
                 System.out.println(a);
             }
@@ -136,8 +134,8 @@ public class DiagnosticCenter {
 
     public void FindAppointmentByExamID(int id){
 
-        Exam e = exams.get(id);
-        for (Appointment a: appointments.values()){
+        Exam e = fm.getexams().get(id);
+        for (Appointment a: fm.getappointments().values()){
             if (e.getCode() == a.getExamId()){
                 System.out.println(a);
             }
@@ -149,7 +147,7 @@ public class DiagnosticCenter {
 
     public void FindAppointmentDateByPatientID(int id){
 
-        for (Appointment a: appointments.values()){
+        for (Appointment a: fm.getappointments().values()){
             if (a.getPatientId() == id){
                 System.out.println(a.getExamDate());
             }
@@ -161,8 +159,8 @@ public class DiagnosticCenter {
 
     public void removeAppointment(int id){
 
-        if (appointments.containsKey(id)){
-            appointments.remove(id);
+        if (fm.getappointments().containsKey(id)){
+            fm.getappointments().get(id).setCancelled(true);
             System.out.println("Appointment deleted successfully.");
         } else {
             System.out.println("Appointment not found.");
@@ -174,13 +172,13 @@ public class DiagnosticCenter {
 
     public void showDayAppointments(String date){
 
-        for (Appointment a: appointments.values()){
+        for (Appointment a: fm.getappointments().values()){
             if (a.getExamDate()==date){
-                for (Patient p:patients.values()){
+                for (Patient p:fm.getpatients().values()){
                     if (a.getPatientId()==p.getID())
                         System.out.println("Patient's name: " + p.getName());
                 }
-                for (Exam e:exams.values()){
+                for (Exam e:fm.getexams().values()){
                     if (e.getCode()==a.getExamId()){
                         System.out.println("Name of the examination: " + e.getExamName());
                     }
@@ -197,13 +195,13 @@ public class DiagnosticCenter {
 
         double totalProfitFromAllPatients=0;
 
-        for (Patient p:patients.values()){
+        for (Patient p:fm.getpatients().values()){
             System.out.println(p.getName());
             double totalprofitperPerson=0;
-            for (Appointment a: appointments.values()){
+            for (Appointment a: fm.getappointments().values()){
                 if(p.getID()==a.getPatientId()){
                     System.out.println(a);
-                    for (Exam e: exams.values()){
+                    for (Exam e: fm.getexams().values()){
                         if(e.getCode()==a.getExamId()){
                             totalprofitperPerson = totalprofitperPerson + e.getCost(a.getFastResults());
                             break;
@@ -225,10 +223,10 @@ public class DiagnosticCenter {
 
         double totalProfitFromAllExams=0;
 
-        for (Exam e:exams.values()){
+        for (Exam e:fm.getexams().values()){
             double totalProfitperExam = 0;
             System.out.println("Exam Id: " + e.getCode() + "Exam Category: " + e.getExamCategory() + "Exam name: " + e.getExamName());
-            for (Appointment a:appointments.values()){
+            for (Appointment a:fm.getappointments().values()){
                 if(e.getCode()==a.getExamId()){
                     System.out.println(a);
                     totalProfitperExam = totalProfitperExam + e.getCost(a.getFastResults());
@@ -253,8 +251,8 @@ public class DiagnosticCenter {
             System.out.println("Category: " + category);
             double categoryProfit = 0;
         
-            for (Appointment a : appointments.values()){
-                Exam e = exams.get(a.getExamId());
+            for (Appointment a : fm.getappointments().values()){
+                Exam e = fm.getexams().get(a.getExamId());
             
                 if (e.getExamCategory().equals(category)){
                     System.out.println(a); 
