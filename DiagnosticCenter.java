@@ -1,8 +1,5 @@
 
 import java.util.HashMap;
-
-import com.apple.eio.FileManager;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -148,9 +145,9 @@ public class DiagnosticCenter {
 
     public boolean isFullyBooked(int examId, String date){
         int count = 0;
-        Exam e = exams.get(examId);
+        Exam e = fm.getexams().get(examId);
     
-        for (Appointment a : appointments.values()){
+        for (Appointment a : fm.getappointments().values()){
             if (a.getExamId() == examId && a.getExamDate().equals(date)){
                 count++;
             }
