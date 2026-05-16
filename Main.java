@@ -210,7 +210,7 @@ public class Main {
                                 System.out.println("Choose the doctor for this exam based on his/her id: ");
                                 int idDoctor = Integer.parseInt(in.nextLine());
 
-                                System.out.println("Choose the cost for this exam");
+                                System.out.println("Choose the cost for this exam based on its category and characteristics");
                                 int cost = Integer.parseInt(in.nextLine());
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
