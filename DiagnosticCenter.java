@@ -93,25 +93,37 @@ public class DiagnosticCenter {
 
     public void FindExamByDoctorID(int id){
 
+        boolean flag = false;
         for (Exam e: fm.getexams().values()){
             if (e.getIdDoctor()==id){
                 System.out.println(e);
+                flag = true;
             }
         }
+        if (!flag){
+            System.out.println("No exams found ");
+        }
+
     }
+    
+    
 
     // show appointment of a doctor 1.4
 
     public void FindAppointmentByDoctorID(int id){
-
+        boolean flag=false;
         for (Exam e: fm.getexams().values()){
             if (e.getIdDoctor()==id){
                 for (Appointment a: fm.getappointments().values()){
                     if (e.getCode() == a.getExamId()){
                         System.out.println(a);
+                        flag=true;
                     }
                 }
             }
+        }
+        if (!flag){
+            System.out.println("No appointments found ");
         }
 
     }
@@ -119,12 +131,16 @@ public class DiagnosticCenter {
     // show patient's appointments 2.3
 
     public void FindAppointmentByPatientID(int id){
-
+        boolean flag = false;
         Patient p = fm.getpatients().get(id);
         for (Appointment a: fm.getappointments().values()){
             if (a.getPatientId() == p.getID()){
                 System.out.println(a);
+                flag=true;
             }
+        }
+        if (!flag){
+            System.out.println("No appointments found ");
         }
 
     }
@@ -132,12 +148,16 @@ public class DiagnosticCenter {
     // show appointments of a specific exam type 3.3
 
     public void FindAppointmentByExamID(int id){
-
+        boolean flag = false;
         Exam e = fm.getexams().get(id);
         for (Appointment a: fm.getappointments().values()){
             if (e.getCode() == a.getExamId()){
                 System.out.println(a);
+                flag=true;
             }
+        }
+        if (!flag){
+            System.out.println("No appointments found for this exam ");
         }
 
     }

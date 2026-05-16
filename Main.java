@@ -30,7 +30,7 @@ public class Main {
 			imagingExam e1 = new imagingExam("Imaging", "XRAY", 10,30,2,"X-Ray"); 
 			microbiologicalExam e2 = new microbiologicalExam("Microbiological","PCR",20,20,3,"Blood");
 			dc.fm.getexams().put(e1.getCode(),e1);
-			dc.fm.getexams().put(e1.getCode(),e1);
+			dc.fm.getexams().put(e2.getCode(),e2);
 		}
 		else dc.fm.loadFile("exams.txt");
 		
