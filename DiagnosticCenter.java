@@ -186,7 +186,7 @@ public class DiagnosticCenter {
 
         if (date.matches("\\d{2}:\\d{2}:\\d{4}")){
             for (Appointment a: fm.getappointments().values()){
-                if (a.getExamDate()==date){
+                if (a.getExamDate().equals(date)){
                     for (Patient p:fm.getpatients().values()){
                         if (a.getPatientId()==p.getID())
                             System.out.println("Patient's name: " + p.getName());
