@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -123,13 +123,16 @@ public class Main {
                                 System.out.println("Give your email adress: ");
                                 String email = in.nextLine();
                                 dc.addPatient(name,phone,email);
+                                break;
                             case "2" :
                                 dc.listAllPatients();
+                                break;
                             case "3" :
                                 dc.listAllPatients();
                                 System.out.println("Choose the patient based on his/her id: ");
                                 int id = Integer.parseInt(in.nextLine());
                                 dc.FindAppointmentByPatientID(id);
+                                break;
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
@@ -156,28 +159,28 @@ public class Main {
                                 String examCategory;
                                 String answer3;
 
-                                if (answer=="1"){
+                                if (answer.equals("1")){
                                     examCategory ="Imaging";
                                     System.out.println("Choose the machine type for your exam: ");
                                     System.out.println("1. MRI\n2. CT\n3. X-RAY");
                                     answer3 = in.nextLine();
                                    
-                                    if (answer3=="1"){
+                                    if (answer3.equals("1")){
                                         details="MRI";
-                                    }else if(answer3=="2"){
+                                    }else if(answer3.equals("2")){
                                         details="CT";
                                     }else{
                                         details="X-RAY";
                                     }
-                                }else if (answer1=="2"){
+                                }else if (answer.equals("2")){
                                     examCategory="Microbiological";
                                     System.out.println("Choose the type of sample needed: ");
                                     System.out.println("1. Blood\n2. Urine\n3. Swab");
                                     answer3 = in.nextLine();
                                     
-                                    if (answer3=="1"){
+                                    if (answer3.equals("1")){
                                         details="Blood";
-                                    }else if(answer3=="2"){
+                                    }else if(answer3.equals("2")){
                                         details="Urine";
                                     }else{
                                         details="Swab";
@@ -188,9 +191,9 @@ public class Main {
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
                                     answer3 = in.nextLine();
                                     
-                                    if (answer3=="1"){
+                                    if (answer3.equals("1")){
                                         details="Cardiology";
-                                    }else if(answer3=="2"){
+                                    }else if(answer3.equals("2")){
                                         details="Neurology";
                                     }else{
                                         details="Pulmonology";
@@ -211,17 +214,17 @@ public class Main {
                                 int cost = Integer.parseInt(in.nextLine());
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
-
+                                break;
                             case "2" :
 
                                 dc.listAllExams();
-
+                                break;
                             case "3" :
                                 dc.listAllExams();
                                 System.out.println("Choose the exam based on its id to see its appointments: ");
                                 int id = Integer.parseInt(in.nextLine());
                                 dc.FindAppointmentByExamID(id);
-
+                                break;
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
@@ -240,64 +243,64 @@ public class Main {
                                 break;
                             case "1" : 
 
-                            System.out.println("Choose the patient based on his/her id: ");
-                            dc.listAllPatients();
-                            int patientId = Integer.parseInt(in.nextLine());
+                                System.out.println("Choose the patient based on his/her id: ");
+                                dc.listAllPatients();
+                                int patientId = Integer.parseInt(in.nextLine());
 
-                            System.out.println("Choose the exam based on its id: ");
-                            dc.listAllExams();
-                            int examId = Integer.parseInt(in.nextLine());
+                                System.out.println("Choose the exam based on its id: ");
+                                dc.listAllExams();
+                                int examId = Integer.parseInt(in.nextLine());
 
-                            String date;
-                            while(true){
-                                System.out.println("Give date as the example:\nDD:MM:EEEE");
-                                date = in.nextLine();
-                                if (!date.matches("\\d{2}:\\d{2}:\\d{4}")){
-                                    System.out.println("Wrong date format. Try again.");
-                                    continue;
-								}
-                                if (dc.isFullyBooked(examId, date)){
-                                    System.out.println("No available slots for this date. Try another date.");
-                                    continue;
+                                String date;
+                                while(true){
+                                    System.out.println("Give date as the example:\nDD:MM:EEEE");
+                                    date = in.nextLine();
+                                    if (!date.matches("\\d{2}:\\d{2}:\\d{4}")){
+                                        System.out.println("Wrong date format. Try again.");
+                                        continue;
+                                    }
+                                    if (dc.isFullyBooked(examId, date)){
+                                        System.out.println("No available slots for this date. Try another date.");
+                                        continue;
+                                    }
+                                    break;
+
                                 }
+                                
+                                boolean fastResults;
+                                System.out.println("Fast results? (1=Yes, 0=No): ");
+                                String answer3= in.nextLine();
+                                if (answer3.equals("1")){
+                                    fastResults=true;
+                                }else{
+                                    fastResults=false;
+                                }
+
+                                dc.addAppointment(patientId,examId,fastResults,date);
                                 break;
-
-                            }
-                            
-                            boolean fastResults;
-                            System.out.println("Fast results? (1=Yes, 0=No): ");
-                            String answer3= in.nextLine();
-                            if (answer3=="1"){
-                                fastResults=true;
-                            }else{
-                                fastResults=false;
-                            }
-
-                            dc.addAppointment(patientId,examId,fastResults,date);
-					
                             case "2" :
                                 dc.listAllAppointments();
-
+                                break;
                             case "3" :
 
                                 System.out.println("Choose the patient based on his/her id: ");
                                 dc.listAllPatients();
                                 int id =Integer.parseInt(in.nextLine());
                                 dc.FindAppointmentDateByPatientID(id);
-
+                                break;
                             case "4":
 
                                 System.out.println("Choose the exam you want to delete by choosing its id: ");
                                 dc.listAllExams();
                                 int id1 = Integer.parseInt(in.nextLine());
                                 dc.removeAppointment(id1);
-
+                                break;
                             case "5" :
 
                                 System.out.println("Give a date (HH:MM:EEEE) to see its appointments: ");
                                 String date1 = in.nextLine();
                                 dc.showDayAppointments(date1);
-
+                                break;
                                 
                             default:
                                 System.out.println("Wrong input, Try again");
@@ -317,13 +320,13 @@ public class Main {
 
                             case "1" :
                                 dc.showTotalProfitsPerPatient();
-
+                                break;
                             case "2" :
                                 dc.showTotalProfitsperExam();
-
+                                break;
                             case "3" :
                                 dc.revenuePerCategory();
-
+                                break;
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
@@ -337,3 +340,4 @@ public class Main {
         }
     }
 }
+
