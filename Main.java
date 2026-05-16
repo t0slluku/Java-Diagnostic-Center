@@ -78,7 +78,7 @@ public class Main {
                                 System.out.println("Give the number of your phone: ");
                                 String phone = in.nextLine();
                                 System.out.println("Specialties:");
-                                System.out.println("Cardiology\nRadiology\nMIcrobiology\nNeurology\nPulmonology");
+                                System.out.println("Cardiology\nRadiology\nMicrobiology\nNeurology\nPulmonology");
                                 String specialty = in.nextLine();
                                 System.out.println("Years of experience: ");
                                 int yearsOfExp=Integer.parseInt(in.nextLine());
@@ -340,4 +340,5 @@ public class Main {
         }
     }
 }
+
 
