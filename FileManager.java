@@ -42,43 +42,30 @@ class FileManager {
 
                     patients.put(patient.getID(), patient);
                 } else if (filePath.equals("exams.txt")) {
-                    String examType = tokens[1];
-                    switch (examType) {
-                        case "Imaging":
-                            imagingExam imagingExam = new imagingExam(
-									Integer.parseInt(tokens[0]),
-                                    tokens[1],
-                                    tokens[2],
-                                    Integer.parseInt(tokens[3]),
-                                    Integer.parseInt(tokens[4]),
-                                    Integer.parseInt(tokens[5]),
-                                    tokens[6]
-                            );
-                            exams.put(imagingExam.getCode(), imagingExam);
+                    
+                    String examCategory = tokens[2];
+                    
+                    int code = Integer.parseInt(tokens[0]);
+                    String examName = tokens[1];
+                    String details = tokens[3];
+                    int maxSlots = Integer.parseInt(tokens[4]);
+                    int cost = Integer.parseInt(tokens[5]);
+                    int doctorId = Integer.parseInt(tokens[6]);
+
+                    switch (examCategory) {
+                        case "Imaging": 
+                            imagingExam imgExam = new imagingExam(code, examCategory, examName, maxSlots, cost, doctorId, details);
+                            exams.put(imgExam.getCode(), imgExam);
                             break;
+                            
                         case "Microbiological":
-                            microbiologicalExam microbiologicalExam = new microbiologicalExam(
-									Integer.parseInt(tokens[0]),
-                                    tokens[1],
-                                    tokens[2],
-                                    Integer.parseInt(tokens[3]),
-                                    Integer.parseInt(tokens[4]),
-                                    Integer.parseInt(tokens[5]),
-                                    tokens[6]
-                            );
-                            exams.put(microbiologicalExam.getCode(), microbiologicalExam);
+                            microbiologicalExam microExam = new microbiologicalExam(code, examCategory, examName, maxSlots, cost, doctorId, details);
+                            exams.put(microExam.getCode(), microExam);
                             break;
-                        case "Specialized" : 
-                            specializedExam specializedExam = new specializedExam(
-									Integer.parseInt(tokens[0]),
-                                    tokens[1],
-                                    tokens[2],
-                                    Integer.parseInt(tokens[3]),
-                                    Integer.parseInt(tokens[4]),
-                                    Integer.parseInt(tokens[5]),
-                                    tokens[6]
-                            );
-                            exams.put(specializedExam.getCode(), specializedExam);
+                            
+                        case "Specialized":
+                            specializedExam specExam = new specializedExam(code, examCategory, examName, maxSlots, cost, doctorId, details);
+                            exams.put(specExam.getCode(), specExam);
                             break;
                     }
                 } else if (filePath.equals("appointments.txt")) {
@@ -125,11 +112,11 @@ class FileManager {
             } else if (filePath.equals("exams.txt")) {
                 for (Exam exam : exams.values()) {
                     String examType = exam.getExamCategory();
-					if (examType=="Imaging"){
+					if (examType.equals("Imaging")) {
                     writer.write(
-                             exam.getCode() + ","
-							 + exam.getExamName() + ","
-							 +exam.getExamCategory()+","
+                            exam.getCode() + ","
+							+ exam.getExamName() + ","
+							+ exam.getExamCategory()+","
                             +((imagingExam)exam).getMachineType()+","
                             + exam.getMaxSlotsperDay() + ","
 							+ exam.cost() + ","
@@ -137,24 +124,24 @@ class FileManager {
                     writer.newLine();
 					}
 					
-					if (examType=="Microbiological"){
+					if (examType.equals("Microbiological")){
 					writer.write(
-                             exam.getCode() + ","
-							 + exam.getExamName() + ","
-							 +exam.getExamCategory()+","
-                            +((microbiologicalExam)exam).getSampleType()+","
+                            exam.getCode() + ","
+							+ exam.getExamName() + ","
+							+exam.getExamCategory()+","
+                            + ((microbiologicalExam)exam).getSampleType()+","
                             + exam.getMaxSlotsperDay() + ","
 							+ exam.cost() + ","
                             + exam.getIdDoctor());
                     writer.newLine();
 					}
 					
-					if (examType=="Specialized"){
+					if (examType.equals("Specialized")){
 					  writer.write(
-                             exam.getCode() + ","
-							 + exam.getExamName() + ","
-							 +exam.getExamCategory()+","
-                            +((specializedExam)exam).getSpecialty()+","
+                            exam.getCode() + ","
+							+ exam.getExamName() + ","
+							+ exam.getExamCategory()+","
+                            + ((specializedExam)exam).getSpecialty()+","
                             + exam.getMaxSlotsperDay() + ","
 							+ exam.cost() + ","
                             + exam.getIdDoctor());
