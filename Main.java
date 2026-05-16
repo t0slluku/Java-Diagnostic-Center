@@ -78,7 +78,7 @@ public class Main {
                                 System.out.println("Give the number of your phone: ");
                                 String phone = in.nextLine();
                                 System.out.println("Specialties:");
-                                System.out.println("Cardiology\nRadiology\nMIcrobiology\nNeurology\nPulmonology");
+                                System.out.println("Cardiology\nRadiology\nMicrobiology\nNeurology\nPulmonology");
                                 String specialty = in.nextLine();
                                 System.out.println("Years of experience: ");
                                 int yearsOfExp=Integer.parseInt(in.nextLine());
@@ -210,7 +210,7 @@ public class Main {
                                 System.out.println("Choose the doctor for this exam based on his/her id: ");
                                 int idDoctor = Integer.parseInt(in.nextLine());
 
-                                System.out.println("Choose the cost for this exam based on its:\n1. Category\n2. Category's characteristics");
+                                System.out.println("Choose the cost for this exam based on its category and characteristics");
                                 int cost = Integer.parseInt(in.nextLine());
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
@@ -340,4 +340,5 @@ public class Main {
         }
     }
 }
+
 

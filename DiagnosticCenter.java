@@ -1,6 +1,3 @@
-
-import java.util.HashMap;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -25,17 +22,17 @@ public class DiagnosticCenter {
 
     public void addExam(String examCategory, String examName, int maxSlotsperDay, int cost, int idDoctor, String details){
         //details=machine type /sample type / specialty
-        if (details.toLowerCase().contains("ma")| details=="machine"){
+        if (details.equals("MRI") || details.equals("CT") || details.equals("X-RAY")){
             imagingExam i1= new imagingExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
             fm.getexams().put(i1.getCode(), i1);
-        }else if (details.toLowerCase().contains("sam")| details=="sample"){
+        }else if (details.equals("Blood") || details.equals("Urine") || details.equals("Swab")){
             microbiologicalExam m1 = new microbiologicalExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
             fm.getexams().put(m1.getCode(), m1);
-        }else if (details.toLowerCase().contains("spe")| details=="specialty"){
+        }else if (details.equals("Cardiology") || details.equals("Neurology") || details.equals("Pulmonology")){
             specializedExam s1 = new specializedExam(examCategory, examName, maxSlotsperDay, cost, idDoctor, details);
             fm.getexams().put(s1.getCode(), s1);
         }else{
-            System.out.println("This exam category doesn't exists or cant be identified.Please try again!"); 
+            System.out.println("This exam category doesn't exist or can't be identified. Please try again!"); 
         }
         
     }
