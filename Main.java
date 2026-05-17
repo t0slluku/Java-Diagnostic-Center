@@ -120,7 +120,7 @@ public class Main {
                                 String name = in.nextLine();
                                 System.out.println("Give the number of your phone ");
                                 String phone = in.nextLine();
-                                System.out.println("Give your email adress: ");
+                                System.out.println("Give your email address: ");
                                 String email = in.nextLine();
                                 dc.addPatient(name,phone,email);
                                 break;
@@ -187,7 +187,7 @@ public class Main {
                                     }
                                 }else{
                                     examCategory="Specialized";
-                                    System.out.println("Choose the specialty neede for this exam: ");
+                                    System.out.println("Choose the specialty needed for this exam: ");
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
                                     answer3 = in.nextLine();
                                     
@@ -203,7 +203,7 @@ public class Main {
                                 System.out.println("Give the name of the exam: ");
                                 String examName=in.nextLine();  
 
-                                System.out.println("Choose the maximun number of exams of this type per day: ");
+                                System.out.println("Choose the maximum number of exams of this type per day: ");
                                 int maxSlotsperDay=Integer.parseInt(in.nextLine());
 
                                 dc.listAllDoctors();
@@ -290,7 +290,7 @@ public class Main {
                                 break;
                             case "4":
 
-                                System.out.println("Choose the appointment you want to delete by choosing its id: ");
+                                System.out.println("Choose the appointment you want to remove by choosing its id: ");
                                 dc.listAllAppointments();
                                 int id1 = Integer.parseInt(in.nextLine());
                                 dc.removeAppointment(id1);
