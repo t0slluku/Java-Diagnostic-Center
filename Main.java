@@ -290,8 +290,8 @@ public class Main {
                                 break;
                             case "4":
 
-                                System.out.println("Choose the exam you want to delete by choosing its id: ");
-                                dc.listAllExams();
+                                System.out.println("Choose the appointment you want to delete by choosing its id: ");
+                                dc.listAllAppointments();
                                 int id1 = Integer.parseInt(in.nextLine());
                                 dc.removeAppointment(id1);
                                 break;
