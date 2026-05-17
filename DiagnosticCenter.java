@@ -231,6 +231,7 @@ public class DiagnosticCenter {
         double totalProfitFromAllPatients=0;
 
         for (Patient p:fm.getpatients().values()){
+            System.out.println("--------------------------");
             System.out.println(p.getName());
             double totalprofitperPerson=0;
             for (Appointment a: fm.getappointments().values()){
@@ -245,10 +246,10 @@ public class DiagnosticCenter {
                 }
             }
             totalProfitFromAllPatients = totalProfitFromAllPatients + totalprofitperPerson;
-            System.out.println("Total profit per patient: " + p.getName() + "" + totalprofitperPerson);
-            System.out.println("--------------------------");
+            System.out.println("\nTotal profit from patient " + p.getName() + ": " + totalprofitperPerson);
         }
-        System.out.println("Total profit from all patients: " + totalProfitFromAllPatients);
+        System.out.println("--------------------------");
+        System.out.println("\nTotal profit from all patients: " + totalProfitFromAllPatients);
 
     }
 
