@@ -193,7 +193,7 @@ public class DiagnosticCenter {
 
         if (fm.getappointments().containsKey(id)){
             fm.getappointments().get(id).setCancelled(true);
-            System.out.println("Appointment deleted successfully.");
+            System.out.println("Appointment removed successfully.");
         } else {
             System.out.println("Appointment not found.");
         }
@@ -221,7 +221,7 @@ public class DiagnosticCenter {
                 }
             }
         }else{
-            System.out.println("Wrong date type input,try again: ");
+            System.out.println("Wrong date type input, try again: ");
         }
     }
 //5.1
@@ -245,7 +245,7 @@ public class DiagnosticCenter {
                 }
             }
             totalProfitFromAllPatients = totalProfitFromAllPatients + totalprofitperPerson;
-            System.out.println("Total profit per patient: " + p.getName() + totalprofitperPerson);
+            System.out.println("Total profit per patient: " + p.getName() + "" + totalprofitperPerson);
             System.out.println("--------------------------");
         }
         System.out.println("Total profit from all patients: " + totalProfitFromAllPatients);
