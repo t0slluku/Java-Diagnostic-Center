@@ -9,22 +9,22 @@ private boolean fastResults;
 private String examDate;
 private boolean cancelled;
 
-public Appointment(int patientId, int examId, boolean fastResults, String examDate){
+public Appointment(int patientId, int examId, boolean fastResults, String examDate, boolean cancelled){
     this.appointmentId=++nextId;
     this.patientId=patientId;
     this.examId=examId;
     this.fastResults=fastResults;
     this.examDate=examDate;
-    this.cancelled = false;
+    this.cancelled = cancelled;
 }
 
-public Appointment(int appointmentId, int patientId, int examId, boolean fastResults, String examDate){
+public Appointment(int appointmentId, int patientId, int examId, boolean fastResults, String examDate, boolean cancelled){
     this.appointmentId=appointmentId;
     this.patientId=patientId;
     this.examId=examId;
     this.fastResults=fastResults;
     this.examDate=examDate;
-    this.cancelled = false;
+    this.cancelled = cancelled;
 	if (appointmentId > nextId) nextId = appointmentId;
 }
 

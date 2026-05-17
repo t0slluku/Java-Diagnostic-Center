@@ -74,7 +74,8 @@ class FileManager {
                             Integer.parseInt(tokens[1]),
                             Integer.parseInt(tokens[2]),
                             Boolean.parseBoolean(tokens[3]),
-                            tokens[4]
+                            tokens[4],
+                            Boolean.parseBoolean(tokens[5])
                     );
                     appointments.put(appointment.getAppointmentId(), appointment);
                 }
@@ -155,7 +156,8 @@ class FileManager {
                             + appointment.getPatientId() + ","
                             + appointment.getExamId() + ","
                             + appointment.getFastResults() + ","
-                            + appointment.getExamDate());
+                            + appointment.getExamDate() + ","
+                            + appointment.getCancelled());
                     writer.newLine();
                 }
             }

@@ -38,7 +38,7 @@ public class DiagnosticCenter {
     }
 
     public void addAppointment(int patientId, int examId, boolean fastResults, String examDate){
-        Appointment a1 = new Appointment(patientId, examId, fastResults, examDate);
+        Appointment a1 = new Appointment(patientId, examId, fastResults, examDate, false);
         fm.getappointments().put(a1.getAppointmentId(), a1);  
     }
 
@@ -180,7 +180,7 @@ public class DiagnosticCenter {
     public void FindAppointmentDateByPatientID(int id){
 
         for (Appointment a: fm.getappointments().values()){
-            if (a.getPatientId() == id){
+            if (a.getPatientId() == id && !a.getCancelled()){
                 System.out.println(a.getExamDate());
             }
         }
@@ -206,7 +206,7 @@ public class DiagnosticCenter {
 
         if (date.matches("\\d{2}:\\d{2}:\\d{4}")){
             for (Appointment a: fm.getappointments().values()){
-                if (a.getExamDate().equals(date)){
+                if (a.getExamDate().equals(date) && !a.getCancelled()){
                     for (Patient p:fm.getpatients().values()){
                         if (a.getPatientId()==p.getID())
                             System.out.println("Patient's name: " + p.getName());
