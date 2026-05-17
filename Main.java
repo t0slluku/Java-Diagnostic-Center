@@ -17,7 +17,7 @@ public class Main {
 		File file4 = new File("patients.txt");
 	
 		if (!file1.exists()) {
-			System.out.println("\nFile does not exist. Creating data ...");
+			System.out.println("\n Doctors file does not exist. Creating data ...");
 			Doctor d1 = new Doctor("d1", "111", "Cardiology", 10);
 			Doctor d2 = new Doctor("d2", "222", "Radiology", 5);
 			dc.fm.getdoctors().put(d1.getID(),d1);
@@ -26,7 +26,7 @@ public class Main {
 		else dc.fm.loadFile("doctors.txt");
 		
 		if (!file2.exists()) {
-			System.out.println("\nFile does not exist. Creating data ...");
+			System.out.println("\nExams file does not exist. Creating data ...");
 			imagingExam e1 = new imagingExam("Imaging", "XRAY", 10,30,2,"X-Ray"); 
 			microbiologicalExam e2 = new microbiologicalExam("Microbiological","PCR",20,20,3,"Blood");
 			dc.fm.getexams().put(e1.getCode(),e1);
@@ -35,7 +35,7 @@ public class Main {
 		else dc.fm.loadFile("exams.txt");
 		
 		if (!file3.exists()) {
-			System.out.println("\nFile does not exist. Creating data ...");
+			System.out.println("\nAppointments file does not exist. Creating data ...");
 			Appointment a1 = new Appointment(1,1,true,"10:05:2026");
 			Appointment a2 = new Appointment(2,2,false,"16:05:2026");
 			dc.fm.getappointments().put(a1.getAppointmentId(),a1);
@@ -44,7 +44,7 @@ public class Main {
 		else dc.fm.loadFile("appointments.txt");
 		
 		if (!file4.exists()) {
-			System.out.println("\nFile does not exist. Creating data ...");
+			System.out.println("\nPatients file does not exist. Creating data ...");
 			Patient p1 = new Patient("P1", "6901", "a@a.com");
 			Patient p2 = new Patient("P2", "6902", "b@b.com");	
 			dc.fm.getpatients().put(p1.getID(),p1);
@@ -210,7 +210,7 @@ public class Main {
                                 System.out.println("Choose the doctor for this exam based on his/her id: ");
                                 int idDoctor = Integer.parseInt(in.nextLine());
 
-                                System.out.println("Choose the cost for this exam based on its category and characteristics");
+                                System.out.println("Choose the cost for this exam based on its category and characteristics: ");
                                 int cost = Integer.parseInt(in.nextLine());
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
