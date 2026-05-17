@@ -261,7 +261,8 @@ public class DiagnosticCenter {
 
         for (Exam e:fm.getexams().values()){
             double totalProfitperExam = 0;
-            System.out.println("Exam Id: " + e.getCode() + "Exam Category: " + e.getExamCategory() + "Exam name: " + e.getExamName());
+            System.out.println("-------------------------");
+            System.out.println("Exam ID: " + e.getCode() + " Exam Category: " + e.getExamCategory() + " Exam name: " + e.getExamName());
             for (Appointment a:fm.getappointments().values()){
                 if(e.getCode()==a.getExamId()){
                     System.out.println(a);
@@ -269,11 +270,11 @@ public class DiagnosticCenter {
                 }
             }
             totalProfitFromAllExams= totalProfitFromAllExams + totalProfitperExam;
-            System.out.println("Total profit per exam: " + totalProfitperExam);
-            System.out.println("-------------------------");
+            System.out.println("\nTotal profit per exam: " + totalProfitperExam);
 
         }
-        System.out.println("Total profit from all exams: " + totalProfitFromAllExams);
+        System.out.println("-------------------------");
+        System.out.println("\nTotal profit from all exams: " + totalProfitFromAllExams);
 
     }
 
@@ -284,6 +285,7 @@ public class DiagnosticCenter {
         double totalProfit = 0;
     
         for (String category : categories){
+            System.out.println("----------------------------");
             System.out.println("Category: " + category);
             double categoryProfit = 0;
         
@@ -297,12 +299,11 @@ public class DiagnosticCenter {
                 }
             }
         
-            System.out.println("Total profit for " + category + ": " + categoryProfit);
-            System.out.println("----------------------------");
+            System.out.println("\nTotal profit for " + category + ": " + categoryProfit);
             totalProfit = totalProfit + categoryProfit;
         }
-    
-        System.out.println("Total profit from all categories: " + totalProfit);
+        System.out.println("----------------------------");
+        System.out.println("\nTotal profit from all categories: " + totalProfit);
     }
 	
 	public void StoreAll(){
