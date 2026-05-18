@@ -247,6 +247,10 @@ public class Main {
                                 //edw tha baleis limit sta id
                                 dc.listAllPatients();
                                 int patientId = Integer.parseInt(in.nextLine());
+								if (!dc.fm.getpatients().containsKey(patientId)){
+                                    System.out.println("Wrong patient id. Try again.");
+                                    break;
+                                }
 
                                 System.out.println("Choose the exam based on its id: ");
                                 dc.listAllExams();
