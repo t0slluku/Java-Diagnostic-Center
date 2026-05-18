@@ -1,10 +1,14 @@
 import java.io.*;
 import java.util.Scanner;
 
+/* @author Emiliano Toslluku p3250210 p3250210@aueb.gr
+   @author Stavros Komiotis p3250099 p3250099@aueb.gr
+   @author Marinos Xenos p3250161 p3250161@aueb.gr
+*/
+
 public class Main {
     public static void main(String[] args) {
 
-        
         DiagnosticCenter dc = new DiagnosticCenter();
         Scanner in = new Scanner(System.in);
         String answer1;
@@ -15,7 +19,7 @@ public class Main {
 		File file2 = new File("exams.txt");
 		File file3 = new File("appointments.txt");
 		File file4 = new File("patients.txt");
-	
+        // Check if the files exist, if not create some initial data
 		if (!file1.exists()) {
 			System.out.println("\nDoctors file does not exist. Creating data ...");
 			Doctor d1 = new Doctor("d1", "111", "Cardiology", 10);
@@ -52,27 +56,29 @@ public class Main {
 		}
 		else dc.fm.loadFile("patients.txt");
 		
-
+        // Main menu loop
         while (!done) {
             done2 = false;
             System.out.println("-----MENU-----");
             System.out.println("1. Doctors\n2. Patients\n3. Exams\n4. Appointments\n5. Statistics\n0. Exit");
             answer1 = in.nextLine();
+            // Submenus for each main menu option
             switch (answer1) {
                 case "0" : 
                     done = true;
 					dc.StoreAll();
                     break;
                 case "1" :
+                    // Doctor menu loop
                     while (!done2) {
                         System.out.println("-----DOCTOR MENU-----");
                         System.out.println("1. Insert doctor\n2. Show all doctors\n3. Show a specific doctor\n4. Appointments for a doctor\n0. Return");
                         answer2 = in.nextLine();
                         switch (answer2) {
-                            case "0" :
+                            case "0" : // Return
                                 done2 = true;
                                 break;
-                            case "1":
+                            case "1": // Insert Doctor
                                 System.out.println("Give name: ");
                                 String name = in.nextLine();
                                 System.out.println("Give the number of your phone: ");
@@ -84,21 +90,39 @@ public class Main {
                                 int yearsOfExp=Integer.parseInt(in.nextLine());
                                 dc.addDoctor(name,phone,specialty,yearsOfExp);
                                 break;
-                            case "2":
+                            case "2": // Show all doctors
                                 dc.listAllDoctors();
                                 break;
-                            case "3":
-                                dc.listAllDoctors();
-                                System.out.println("Choose the doctor based on his/her id: ");
-                                int id =Integer.parseInt(in.nextLine());
-                                dc.FindExamByDoctorID(id);
-                                break;
-                            case "4":
+                            case "3": // Show a specific doctor
                                 dc.listAllDoctors();
                                 System.out.println("Choose the doctor based on his/her id: ");
-                                int id1 =Integer.parseInt(in.nextLine());
-                                dc.FindAppointmentByDoctorID(id1);
+                                // Validate doctor id input
+                                int idDoctor3;
+
+                                do { 
+                                    idDoctor3 = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getdoctors().containsKey(idDoctor3)) {
+                                        System.out.println("Doctor id not found, try again");
+                                    }
+                                } while (!dc.fm.getdoctors().containsKey(idDoctor3));
+
+                                dc.FindExamByDoctorID(idDoctor3);
                                 break;
+                            case "4": // Show appointments for a doctor
+                                dc.listAllDoctors();
+                                System.out.println("Choose the doctor based on his/her id: ");
+                                // Validate doctor id input
+                                int idDoctor4;
+
+                                do { 
+                                    idDoctor4 = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getdoctors().containsKey(idDoctor4)) {
+                                        System.out.println("Doctor id not found, try again");
+                                    }
+                                } while (!dc.fm.getdoctors().containsKey(idDoctor4));
+                                dc.FindAppointmentByDoctorID(idDoctor4);
+                                break;
+
                             default:
                                 System.out.println("Wrong input, Try again");
                                 break;
@@ -106,16 +130,17 @@ public class Main {
                         }
                     }
                     break;
+                // Patient menu loop
                 case "2" : 
                     while (!done2) {
                         System.out.println("-----PATIENT MENU-----");
                         System.out.println("1. Insert patient\n2. Show all patients\n3. Show a specific patient\n0. Return");
                         answer2 = in.nextLine();
                         switch (answer2) {
-                            case "0" :
+                            case "0" : //Return
                                 done2 = true;
                                 break;
-                            case "1" :
+                            case "1" : // Insert Patient
                                 System.out.println("Give name: ");
                                 String name = in.nextLine();
                                 System.out.println("Give the number of your phone ");
@@ -124,14 +149,24 @@ public class Main {
                                 String email = in.nextLine();
                                 dc.addPatient(name,phone,email);
                                 break;
-                            case "2" :
+                            case "2" : // Show all patients
                                 dc.listAllPatients();
                                 break;
-                            case "3" :
+                            case "3" : // Show a specific patient
                                 dc.listAllPatients();
                                 System.out.println("Choose the patient based on his/her id: ");
-                                int id = Integer.parseInt(in.nextLine());
-                                dc.FindAppointmentByPatientID(id);
+                                // Validate patient id input
+                                int idPatient;
+
+                                do { 
+                                    idPatient = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getpatients().containsKey(idPatient)) {
+                                        System.out.println("Patient id not found, try again");
+                                    }
+                                } while (!dc.fm.getpatients().containsKey(idPatient));
+
+                                dc.FindAppointmentByPatientID(idPatient);
+
                                 break;
                             default:
                                 System.out.println("Wrong input, Try again");
@@ -139,18 +174,19 @@ public class Main {
                         }
                     }
                     break;
+                // Exam menu loop
                 case "3" : 
                     while (!done2) {
                         System.out.println("-----EXAM MENU-----");
                         System.out.println("1. Insert exam\n2. Show all exams\n3. Show a specific exam\n0. Return");
                         answer2 = in.nextLine();
                         switch (answer2) {
-                            case "0" :
+                            case "0" : // Return
 
                                 done2 = true;
                                 break;
 
-                            case "1" :
+                            case "1" : // Insert Exam
 
                                 System.out.println("Available exam categories:\nChoose the category");
                                 System.out.println("1. Imaging\n2. Microbiological\n3. Specialized");
@@ -158,7 +194,7 @@ public class Main {
                                 String details = null;
                                 String examCategory = null;
                                 String answer3;
-
+                                // Validate exam category input
                                 do { 
                                     answer = in.nextLine();
 
@@ -172,7 +208,7 @@ public class Main {
                                     examCategory ="Imaging";
                                     System.out.println("Choose the machine type for your exam: ");
                                     System.out.println("1. MRI\n2. CT\n3. X-RAY");
-
+                                    // Validate machine type input
                                     do {
                                         answer3 = in.nextLine();
                                         if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
@@ -191,7 +227,7 @@ public class Main {
                                     examCategory="Microbiological";
                                     System.out.println("Choose the type of sample needed: ");
                                     System.out.println("1. Blood\n2. Urine\n3. Swab");
-
+                                    // Validate sample type input
                                     do {
                                         answer3 = in.nextLine();
                                         if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
@@ -210,7 +246,7 @@ public class Main {
                                     examCategory="Specialized";
                                     System.out.println("Choose the specialty needed for this exam: ");
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
-
+                                    // Validate specialty input
                                     do {
                                         answer3 = in.nextLine();
                                         if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
@@ -231,8 +267,9 @@ public class Main {
                                 String examName=in.nextLine();  
 
                                 System.out.println("Choose the maximum number of exams of this type per day: ");
-
+                                // Validate max slots input
                                 int maxSlotsperDay;
+
                                 do { 
                                     maxSlotsperDay=Integer.parseInt(in.nextLine());
                                     if (maxSlotsperDay <= 0) {
@@ -242,6 +279,7 @@ public class Main {
 
                                 dc.listAllDoctors();
                                 System.out.println("Choose the doctor for this exam based on his/her id: ");
+                                // Validate doctor id input
                                 int idDoctor;
 
                                 do { 
@@ -252,6 +290,7 @@ public class Main {
                                 } while (!dc.fm.getdoctors().containsKey(idDoctor));
 
                                 System.out.println("Choose the cost for this exam based on its category and characteristics: ");
+                                // Validate cost input
                                 int cost;
 
                                 do { 
@@ -264,20 +303,23 @@ public class Main {
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
                                 break;
-                            case "2" :
+                            case "2" : // Show all exams
 
                                 dc.listAllExams();
                                 break;
-                            case "3" :
+                            case "3" : // Show a specific exam
                                 dc.listAllExams();
                                 System.out.println("Choose the exam based on its id to see its appointments: ");
+                                // Validate exam id input
                                 int examId;
+
                                 do {
                                     examId = Integer.parseInt(in.nextLine());
                                     if (!dc.fm.getexams().containsKey(examId)) {
                                         System.out.println("Exam id not found, try again");
                                     }
                                 } while (!dc.fm.getexams().containsKey(examId));
+
                                 dc.FindAppointmentByExamID(examId);
                                 break;
                             default:
@@ -286,21 +328,22 @@ public class Main {
                         }
                     }
                     break;
-                case "4" :
+                case "4" : // Appointment menu loop
 
                     while (!done2) {
                         System.out.println("-----APPOINTMENT MENU-----");
                         System.out.println("1. Insert appointment\n2. Show all appointments\n3. Show appointments of a specific patient\n4. Remove appointment\n5. Show all appointments for a specific day\n0. Return");
                         answer2 = in.nextLine();
                         switch (answer2) {
-                            case "0" :
+                            case "0" : // Return
                                 done2 = true;
                                 break;
                                 
-                            case "1" : 
+                            case "1" : // Insert Appointment
 
                                 System.out.println("Choose the patient based on his/her id: ");
                                 dc.listAllPatients();
+                                // Validate patient id input
                                 int patientId;
 
                                 do {
@@ -312,15 +355,16 @@ public class Main {
 
                                 System.out.println("Choose the exam based on its id: ");
                                 dc.listAllExams();
-
+                                // Validate exam id input
                                 int examId;
+
                                 do {
                                     examId = Integer.parseInt(in.nextLine());
                                     if (!dc.fm.getexams().containsKey(examId)) {
                                         System.out.println("Exam id not found, try again");
                                     }
                                 } while (!dc.fm.getexams().containsKey(examId));
-                                
+                                // Validate date input
                                 String date;
 
                                 while(true){
@@ -337,7 +381,7 @@ public class Main {
                                     break;
 
                                 }
-                                
+                                // Ask if the patient wants fast results and validate input
                                 boolean fastResults = false;
                                 System.out.println("Fast results? (1=Yes, 0=No): ");
                                 String answer3;
@@ -356,14 +400,14 @@ public class Main {
 
                                 dc.addAppointment(patientId,examId,fastResults,date);
                                 break;
-                            case "2" :
+                            case "2" : // Show all appointments
                                 dc.listAllAppointments();
                                 break;
-                            case "3" :
+                            case "3" : // Show appointments of a specific patient
 
                                 System.out.println("Choose the patient based on his/her id: ");
                                 dc.listAllPatients();
-
+                                // Validate patient id input
                                 do {
                                     patientId = Integer.parseInt(in.nextLine());
                                     if (!dc.fm.getpatients().containsKey(patientId)) {
@@ -372,10 +416,11 @@ public class Main {
                                 } while (!dc.fm.getpatients().containsKey(patientId));
                                 dc.FindAppointmentDateByPatientID(patientId);
                                 break;
-                            case "4":
+                            case "4": // Remove appointment
 
                                 System.out.println("Choose the appointment you want to remove by choosing its id: ");
                                 dc.listAllAppointments();
+                                // Validate appointment id input
                                 int appointmentId;
 
                                 do {
@@ -387,7 +432,7 @@ public class Main {
 
                                 dc.removeAppointment(appointmentId);
                                 break;
-                            case "5" :
+                            case "5" : // Show all appointments for a specific day
 
                                 System.out.println("Give a date (HH:MM:EEEE) to see its appointments: ");
 
@@ -411,7 +456,7 @@ public class Main {
                         }
                     }
                     break;
-                case "5" : 
+                case "5" : // Statistics menu loop
                     while (!done2) {
                         System.out.println("-----STAT MENU-----");
                         System.out.println("1. Total income from each patient\n2. Total income from each exam\n3. Total income from each exam category\n0. Return");
