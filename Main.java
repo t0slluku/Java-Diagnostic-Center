@@ -154,64 +154,113 @@ public class Main {
 
                                 System.out.println("Available exam categories:\nChoose the category");
                                 System.out.println("1. Imaging\n2. Microbiological\n3. Specialized");
-                                String answer = in.nextLine();
-                                String details;
-                                String examCategory;
+                                String answer;
+                                String details = null;
+                                String examCategory = null;
                                 String answer3;
+
+                                do { 
+                                    answer = in.nextLine();
+
+                                    if (!answer.equals("1") && !answer.equals("2") && !answer.equals("3")) {
+                                        System.out.println("Wrong input, try again");
+                                    }
+
+                                } while (!answer.equals("1") && !answer.equals("2") && !answer.equals("3"));
 
                                 if (answer.equals("1")){
                                     examCategory ="Imaging";
                                     System.out.println("Choose the machine type for your exam: ");
                                     System.out.println("1. MRI\n2. CT\n3. X-RAY");
-                                    answer3 = in.nextLine();
-                                   
+
+                                    do {
+                                        answer3 = in.nextLine();
+                                        if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
+                                            System.out.println("Wrong input, try again");
+                                        }
+                                    } while (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3"));
+
                                     if (answer3.equals("1")){
                                         details="MRI";
                                     }else if(answer3.equals("2")){
                                         details="CT";
-                                    }else{
+                                    }else if (answer3.equals("3")) {
                                         details="X-RAY";
                                     }
                                 }else if (answer.equals("2")){
                                     examCategory="Microbiological";
                                     System.out.println("Choose the type of sample needed: ");
                                     System.out.println("1. Blood\n2. Urine\n3. Swab");
-                                    answer3 = in.nextLine();
-                                    
+
+                                    do {
+                                        answer3 = in.nextLine();
+                                        if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
+                                            System.out.println("Wrong input, try again");
+                                        }
+                                    } while (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3"));
+
                                     if (answer3.equals("1")){
                                         details="Blood";
                                     }else if(answer3.equals("2")){
                                         details="Urine";
-                                    }else{
+                                    }else if (answer3.equals("3")) {
                                         details="Swab";
                                     }
-                                }else{
+                                }else if (answer.equals("3")) {
                                     examCategory="Specialized";
                                     System.out.println("Choose the specialty needed for this exam: ");
                                     System.out.println("1. Cardiology\n2. Neurology\n3. Pulmonology");
-                                    answer3 = in.nextLine();
-                                    
+
+                                    do {
+                                        answer3 = in.nextLine();
+                                        if (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3")) {
+                                            System.out.println("Wrong input, try again");
+                                        }
+                                    } while (!answer3.equals("1") && !answer3.equals("2") && !answer3.equals("3"));
+
                                     if (answer3.equals("1")){
                                         details="Cardiology";
                                     }else if(answer3.equals("2")){
                                         details="Neurology";
-                                    }else{
+                                    }else if (answer3.equals("3")) {
                                         details="Pulmonology";
                                     }
-                                }  
+                                } 
 
                                 System.out.println("Give the name of the exam: ");
                                 String examName=in.nextLine();  
 
                                 System.out.println("Choose the maximum number of exams of this type per day: ");
-                                int maxSlotsperDay=Integer.parseInt(in.nextLine());
+
+                                int maxSlotsperDay;
+                                do { 
+                                    maxSlotsperDay=Integer.parseInt(in.nextLine());
+                                    if (maxSlotsperDay <= 0) {
+                                        System.out.println("Invalid number, try again");
+                                    }
+                                } while (maxSlotsperDay <= 0);
 
                                 dc.listAllDoctors();
                                 System.out.println("Choose the doctor for this exam based on his/her id: ");
-                                int idDoctor = Integer.parseInt(in.nextLine());
+                                int idDoctor;
+
+                                do { 
+                                    idDoctor = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getdoctors().containsKey(idDoctor)) {
+                                        System.out.println("Doctor id not found, try again");
+                                    }
+                                } while (!dc.fm.getdoctors().containsKey(idDoctor));
 
                                 System.out.println("Choose the cost for this exam based on its category and characteristics: ");
-                                int cost = Integer.parseInt(in.nextLine());
+                                int cost;
+
+                                do { 
+                                    cost = Integer.parseInt(in.nextLine());
+                                    if (cost < 0) {
+                                        System.out.println("Invalid cost, try again");
+                                    }
+                                } while (cost < 0);
+
 
                                 dc.addExam(examCategory,examName,maxSlotsperDay,cost,idDoctor,details);
                                 break;
@@ -222,8 +271,14 @@ public class Main {
                             case "3" :
                                 dc.listAllExams();
                                 System.out.println("Choose the exam based on its id to see its appointments: ");
-                                int id = Integer.parseInt(in.nextLine());
-                                dc.FindAppointmentByExamID(id);
+                                int examId;
+                                do {
+                                    examId = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getexams().containsKey(examId)) {
+                                        System.out.println("Exam id not found, try again");
+                                    }
+                                } while (!dc.fm.getexams().containsKey(examId));
+                                dc.FindAppointmentByExamID(examId);
                                 break;
                             default:
                                 System.out.println("Wrong input, Try again");
@@ -241,22 +296,33 @@ public class Main {
                             case "0" :
                                 done2 = true;
                                 break;
+                                
                             case "1" : 
 
                                 System.out.println("Choose the patient based on his/her id: ");
-                                //edw tha baleis limit sta id
                                 dc.listAllPatients();
-                                int patientId = Integer.parseInt(in.nextLine());
-								if (!dc.fm.getpatients().containsKey(patientId)){
-                                    System.out.println("Wrong patient id. Try again.");
-                                    break;
-                                }
+                                int patientId;
+
+                                do {
+                                    patientId = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getpatients().containsKey(patientId)) {
+                                        System.out.println("Patient id not found, try again");
+                                    }
+                                } while (!dc.fm.getpatients().containsKey(patientId));
 
                                 System.out.println("Choose the exam based on its id: ");
                                 dc.listAllExams();
-                                int examId = Integer.parseInt(in.nextLine());
 
+                                int examId;
+                                do {
+                                    examId = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getexams().containsKey(examId)) {
+                                        System.out.println("Exam id not found, try again");
+                                    }
+                                } while (!dc.fm.getexams().containsKey(examId));
+                                
                                 String date;
+
                                 while(true){
                                     System.out.println("Give date as the example:\nDD:MM:EEEE");
                                     date = in.nextLine();
@@ -272,14 +338,21 @@ public class Main {
 
                                 }
                                 
-                                boolean fastResults;
+                                boolean fastResults = false;
                                 System.out.println("Fast results? (1=Yes, 0=No): ");
-                                String answer3= in.nextLine();
-                                if (answer3.equals("1")){
-                                    fastResults=true;
-                                }else{
-                                    fastResults=false;
-                                }
+                                String answer3;
+
+                                do { 
+                                    answer3= in.nextLine();
+                                    if (answer3.equals("1")){
+                                        fastResults=true;
+                                    }else if (answer3.equals("0")) {
+                                        fastResults=false;
+                                    } else {
+                                        System.out.println("Wrong input, try again");
+                                    }
+                                } while (!answer3.equals("1") && !answer3.equals("0"));
+
 
                                 dc.addAppointment(patientId,examId,fastResults,date);
                                 break;
@@ -290,21 +363,46 @@ public class Main {
 
                                 System.out.println("Choose the patient based on his/her id: ");
                                 dc.listAllPatients();
-                                int id =Integer.parseInt(in.nextLine());
-                                dc.FindAppointmentDateByPatientID(id);
+
+                                do {
+                                    patientId = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getpatients().containsKey(patientId)) {
+                                        System.out.println("Patient id not found, try again");
+                                    }
+                                } while (!dc.fm.getpatients().containsKey(patientId));
+                                dc.FindAppointmentDateByPatientID(patientId);
                                 break;
                             case "4":
 
                                 System.out.println("Choose the appointment you want to remove by choosing its id: ");
                                 dc.listAllAppointments();
-                                int id1 = Integer.parseInt(in.nextLine());
-                                dc.removeAppointment(id1);
+                                int appointmentId;
+
+                                do {
+                                    appointmentId = Integer.parseInt(in.nextLine());
+                                    if (!dc.fm.getappointments().containsKey(appointmentId)) {
+                                        System.out.println("Appointment id not found, try again");
+                                    }
+                                } while (!dc.fm.getappointments().containsKey(appointmentId));
+
+                                dc.removeAppointment(appointmentId);
                                 break;
                             case "5" :
 
                                 System.out.println("Give a date (HH:MM:EEEE) to see its appointments: ");
-                                String date1 = in.nextLine();
-                                dc.showDayAppointments(date1);
+
+                                while(true){
+                                    date = in.nextLine();
+
+                                    if (!date.matches("\\d{2}:\\d{2}:\\d{4}")){
+                                        System.out.println("Wrong date format. Try again.");
+                                        continue;
+                                    }
+
+                                    break;
+                                }
+
+                                dc.showDayAppointments(date);
                                 break;
                                 
                             default:
