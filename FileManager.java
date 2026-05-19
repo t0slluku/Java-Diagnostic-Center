@@ -2,12 +2,12 @@ import java.io.*;
 import java.util.*;
 
 class FileManager {
-	
+	// The HashMaps
     private HashMap<Integer,Doctor> doctors = new HashMap<>();
     private HashMap<Integer,Patient> patients = new HashMap<>();
     private HashMap<Integer,Appointment> appointments= new HashMap<>();
     private HashMap<Integer,Exam> exams= new HashMap<>();
-	
+	// Reading files
     void loadFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
@@ -21,7 +21,6 @@ class FileManager {
                     tokens[i] = tokens[i].trim();
                 }
 
-                //String type = tokens[0];
                 if (filePath.equals("doctors.txt")) {
                     Doctor doctor = new Doctor(
 							Integer.parseInt(tokens[0]),
@@ -80,14 +79,14 @@ class FileManager {
                     appointments.put(appointment.getAppointmentId(), appointment);
                 }
             }
-			reader.close(); // κλείσιμο αρχείου
+			reader.close();
 
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
     }
-
-	    void storeFile(String filePath) {
+    // Saving files
+	void storeFile(String filePath) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
@@ -161,27 +160,27 @@ class FileManager {
                     writer.newLine();
                 }
             }
-			writer.close(); // κλείσιμο αρχείου
+			writer.close(); 
 
         } catch (IOException e) {
             System.err.println("Error writing file: " + e.getMessage());
         }
-    } //storeFile
+    }
 
+    // Getters for the HashMaps
+    public HashMap<Integer,Doctor> getdoctors(){
+        return doctors;
+    }
 
-public HashMap<Integer,Doctor> getdoctors(){
-    return doctors;
-}
+    public HashMap<Integer,Exam> getexams(){
+        return exams;
+    }
 
-public HashMap<Integer,Exam> getexams(){
-    return exams;
-}
+    public HashMap<Integer,Appointment> getappointments(){
+        return appointments;
+    }
 
-public HashMap<Integer,Appointment> getappointments(){
-    return appointments;
-}
-
-public HashMap<Integer,Patient> getpatients(){
-    return patients;
-}
+    public HashMap<Integer,Patient> getpatients(){
+        return patients;
+    }
 }
