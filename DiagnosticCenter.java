@@ -8,7 +8,6 @@ public class DiagnosticCenter {
 
     FileManager fm = new FileManager();
 	
-
     // adders
     public void addDoctor(String name, String phone, String specialty, int yearsofExp){
         Doctor d1 = new Doctor(name, phone, specialty, yearsofExp);
