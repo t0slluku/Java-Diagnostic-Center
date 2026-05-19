@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 
-// prepei na allajoun oi tostring() se kathe klash ontothtwn
+// Most if not all methods are here
 
 public class DiagnosticCenter {
 
@@ -41,11 +41,11 @@ public class DiagnosticCenter {
         fm.getappointments().put(a1.getAppointmentId(), a1);  
     }
 
-    // list all //na kanw 1 gia 3
+    // list all-ers
 
     public void listAllDoctors(){
         if (fm.getdoctors().isEmpty()){
-        System.out.println("List is empty.");
+            System.out.println("List is empty.");
         } else {
             for (Doctor d : fm.getdoctors().values()){
                 System.out.println(d); 
@@ -88,7 +88,7 @@ public class DiagnosticCenter {
     }
 
     
-    // show one doctor 1.3
+    // Show one doctor 1.3
 
     public void FindExamByDoctorID(int id){
 
@@ -107,7 +107,7 @@ public class DiagnosticCenter {
     
     
 
-    // show appointment of a doctor 1.4
+    // Show appointment of a doctor 1.4
 
     public void FindAppointmentByDoctorID(int id){
         boolean flag=false;
@@ -127,7 +127,7 @@ public class DiagnosticCenter {
 
     }
 
-    // show patient's appointments 2.3
+    // Show patient's appointments 2.3
 
     public void FindAppointmentByPatientID(int id){
         boolean flag = false;
@@ -144,7 +144,7 @@ public class DiagnosticCenter {
 
     }
 
-    // show appointments of a specific exam type 3.3
+    // Show appointments of a specific exam type 3.3
 
     public void FindAppointmentByExamID(int id){
         boolean flag = false;
@@ -174,7 +174,7 @@ public class DiagnosticCenter {
         return count >= e.getMaxSlotsperDay();
     }
 
-    //show the dates of a patient's appointment 4.3
+    // Show the dates of a patient's appointment 4.3
 
     public void FindAppointmentDateByPatientID(int id){
 
@@ -186,7 +186,7 @@ public class DiagnosticCenter {
 
     }
 
-    // remove an appointment 4.4
+    // Remove an appointment 4.4
 
     public void removeAppointment(int id){
 
@@ -199,7 +199,7 @@ public class DiagnosticCenter {
 
     }
 
-    //show appointment's of a specific date 4.5
+    // Show appointment's of a specific date 4.5
 
     public void showDayAppointments(String date){
 
@@ -223,7 +223,7 @@ public class DiagnosticCenter {
             System.out.println("Wrong date type input, try again: ");
         }
     }
-//5.1
+// Show profit per patient 5.1
 
     public void showTotalProfitsPerPatient(){
 
@@ -252,7 +252,7 @@ public class DiagnosticCenter {
 
     }
 
-    //5.2
+    // Show total profits per exam 5.2
 
     public void showTotalProfitsperExam(){
 
@@ -277,7 +277,7 @@ public class DiagnosticCenter {
 
     }
 
-    //5.3
+    // Show profit per category 5.3
 
     public void revenuePerCategory(){
         String[] categories = {"Imaging", "Microbiological", "Specialized"};
@@ -304,7 +304,7 @@ public class DiagnosticCenter {
         System.out.println("----------------------------");
         System.out.println("\nTotal profit from all categories: " + totalProfit);
     }
-	
+	// Saving files
 	public void StoreAll(){
 		fm.storeFile("doctors.txt");
 		fm.storeFile("patients.txt");
@@ -312,11 +312,7 @@ public class DiagnosticCenter {
 		fm.storeFile("appointments.txt");
 	}
 	
-	
-
-
 }
-
 
 
 
